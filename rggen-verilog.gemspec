@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.email = ['rggen@googlegroups.com']
 
   spec.summary = "rggen-verilog-#{RgGen::Verilog::VERSION}"
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.description = 'Verilog write plugin for RgGen'
   spec.homepage = 'https://github.com/rggen/rggen-verilog'
   spec.license = 'MIT'
