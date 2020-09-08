@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'rggen/devtools/spec_helper'
+require 'support/shared_context'
 
 require 'rggen/core'
 
@@ -19,3 +20,4 @@ RSpec.configure do |config|
 end
 
 require 'rggen/verilog'
+RgGen::Verilog.default_setup(builder)
