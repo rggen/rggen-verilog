@@ -11,6 +11,7 @@ module RgGen
     PLUGIN_NAME = :verilog
 
     FEATURES = [
+      'verilog/register/verilog_top',
       'verilog/register_block/protocol',
       'verilog/register_block/protocol/apb',
       'verilog/register_block/protocol/axi4lite',

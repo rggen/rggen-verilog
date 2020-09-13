@@ -61,6 +61,20 @@ RSpec.shared_context 'verilog common' do
     have_declaration(layer, :variable, wire.declaration).and have_identifier(handler, wire.identifier)
   end
 
+  def not_have_wire(*args, &body)
+    layer, handler, attributes =
+      if args.size == 3
+        args[0..2]
+      elsif args.size == 2
+        [nil, *args[0..1]]
+      else
+        [nil, args[0], {}]
+      end
+    attributes = attributes.merge(data_type: :wire, array_format: :serialized)
+    wire = RgGen::SystemVerilog::Common::Utility::DataObject.new(:variable, **attributes, &body)
+    not_have_declaration(layer, :variable, wire.declaration).and not_have_identifier(handler, wire.identifier)
+  end
+
   def have_parameter(*args, &body)
     layer, handler, attributes =
       if args.size == 3
