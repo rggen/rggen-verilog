@@ -11,11 +11,16 @@ module RgGen
     PLUGIN_NAME = :verilog
 
     FEATURES = [
+      'verilog/bit_field/verilog_top',
+      'verilog/register/type',
+      'verilog/register/type/external',
+      'verilog/register/type/indirect',
       'verilog/register/verilog_top',
       'verilog/register_block/protocol',
       'verilog/register_block/protocol/apb',
       'verilog/register_block/protocol/axi4lite',
-      'verilog/register_block/verilog_top'
+      'verilog/register_block/verilog_top',
+      'verilog/register_file/verilog_top'
     ].freeze
 
     def self.register_component(builder)

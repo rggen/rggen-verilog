@@ -1,0 +1,29 @@
+rggen_default_register #(
+  .READABLE       (<%= readable %>),
+  .WRITABLE       (<%= writable %>),
+  .ADDRESS_WIDTH  (<%= address_width %>),
+  .OFFSET_ADDRESS (<%= offset_address %>),
+  .BUS_WIDTH      (<%= bus_width %>),
+  .DATA_WIDTH     (<%= width %>),
+  .VALID_BITS     (<%= valid_bits %>),
+  .REGISTER_INDEX (<%= register_index %>)
+) u_register (
+  .i_clk                  (<%= register_block.clock %>),
+  .i_rst_n                (<%= register_block.reset %>),
+  .i_register_valid       (<%= register_block.register_valid %>),
+  .i_register_write       (<%= register_block.register_write %>),
+  .i_register_address     (<%= register_block.register_address %>),
+  .i_register_write_data  (<%= register_block.register_write_data %>),
+  .i_register_strobe      (<%= register_block.register_strobe %>),
+  .o_register_active      (<%= register_block.register_active[[register.index]] %>),
+  .o_register_ready       (<%= register_block.register_ready[[register.index]] %>),
+  .o_register_status      (<%= register_block.register_status[[register.index]] %>),
+  .o_register_read_data   (<%= register_block.register_read_data[[register.index]] %>),
+  .o_register_value       (<%= register_block.register_value[[register.index]] %>),
+  .o_bit_field_valid      (<%= register.bit_field_valid %>),
+  .o_bit_field_read_mask  (<%= register.bit_field_read_mask %>),
+  .o_bit_field_write_mask (<%= register.bit_field_write_mask %>),
+  .o_bit_field_write_data (<%= register.bit_field_write_data %>),
+  .i_bit_field_read_data  (<%= register.bit_field_read_data %>),
+  .i_bit_field_value      (<%= register.bit_field_value %>)
+);

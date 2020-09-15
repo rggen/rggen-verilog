@@ -2,6 +2,8 @@
 
 RgGen.define_simple_feature(:register, :verilog_top) do
   verilog do
+    include RgGen::SystemVerilog::RTL::RegisterIndex
+
     build do
       unless register.bit_fields.empty?
         wire :bit_field_valid, {
