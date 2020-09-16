@@ -84,6 +84,7 @@ RSpec.shared_context 'verilog common' do
       else
         [nil, args[0], {}]
       end
+      attributes = attributes.merge(array_format: :serialized)
     parameter = RgGen::SystemVerilog::Common::Utility::DataObject.new(:parameter, **attributes, &body)
     have_declaration(layer, :parameter, parameter.declaration).and have_identifier(handler, parameter.identifier)
   end
