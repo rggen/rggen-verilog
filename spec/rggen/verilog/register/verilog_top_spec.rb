@@ -14,6 +14,7 @@ RSpec.describe 'register/verilog_top' do
     RgGen.enable(:bit_field, :type, :rw)
     RgGen.enable(:register_block, :verilog_top)
     RgGen.enable(:register, :verilog_top)
+    RgGen.enable(:bit_field, :verilog_top)
   end
 
   def create_registers(&body)

@@ -14,6 +14,7 @@ RSpec.describe 'register/type/default' do
     RgGen.enable(:register_block, :verilog_top)
     RgGen.enable(:register_file, :verilog_top)
     RgGen.enable(:register, :verilog_top)
+    RgGen.enable(:bit_field, :verilog_top)
   end
 
   describe '#generate_code' do

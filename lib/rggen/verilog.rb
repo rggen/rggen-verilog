@@ -11,6 +11,10 @@ module RgGen
     PLUGIN_NAME = :verilog
 
     FEATURES = [
+      'verilog/bit_field/type',
+      'verilog/bit_field/type/rc_w0c_w1c_wc_woc',
+      'verilog/bit_field/type/ro',
+      'verilog/bit_field/type/rw_w1_wo_wo1',
       'verilog/bit_field/verilog_top',
       'verilog/register/type',
       'verilog/register/type/external',
