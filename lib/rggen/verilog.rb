@@ -25,6 +25,7 @@ module RgGen
       'verilog/bit_field/type/w0crs_w1crs_wcrs',
       'verilog/bit_field/type/w0src_w1src_wsrc',
       'verilog/bit_field/type/w0t_w1t',
+      'verilog/bit_field/type/w0trg_w1trg',
       'verilog/bit_field/verilog_top',
       'verilog/register/type',
       'verilog/register/type/external',
