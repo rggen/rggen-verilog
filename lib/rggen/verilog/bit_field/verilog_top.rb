@@ -18,6 +18,13 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       end
     end
 
+    main_code :register do
+      local_scope("g_#{bit_field.name}") do |scope|
+        scope.loop_size loop_size
+        scope.body(&method(:body_code))
+      end
+    end
+
     def value(offsets = nil, width = nil)
       value_lsb = bit_field.lsb(offsets&.last || local_index)
       value_width = width || bit_field.width
@@ -68,6 +75,15 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
         .initial_values
         .reverse
         .map { |v| hex(v, bit_field.width) }
+    end
+
+    def loop_size
+      loop_variable = local_index
+      loop_variable && { loop_variable => bit_field.sequence_size }
+    end
+
+    def body_code(code)
+      bit_field.generate_code(code, :bit_field, :top_down)
     end
   end
 end
