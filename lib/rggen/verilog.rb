@@ -2,6 +2,8 @@
 
 require 'rggen/systemverilog/rtl'
 require_relative 'verilog/version'
+require_relative 'verilog/utility/local_scope'
+require_relative 'verilog/utility'
 require_relative 'verilog/component'
 require_relative 'verilog/feature'
 require_relative 'verilog/factories'

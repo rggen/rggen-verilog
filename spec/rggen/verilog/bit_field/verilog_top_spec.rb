@@ -351,7 +351,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[2]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_2
           genvar i;
-          for (i = 0;i < 2;++i) begin : g
+          for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (1),
               .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
@@ -375,7 +375,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[3]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_3
           genvar i;
-          for (i = 0;i < 2;++i) begin : g
+          for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice(REGISTER_0_BIT_FIELD_3_INITIAL_VALUE, 2, i)),
@@ -399,7 +399,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[4]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_4
           genvar i;
-          for (i = 0;i < 2;++i) begin : g
+          for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, i)),
@@ -465,7 +465,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[7]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_2
           genvar j;
-          for (j = 0;j < 2;++j) begin : g
+          for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (1),
               .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
@@ -489,7 +489,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[8]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_3
           genvar j;
-          for (j = 0;j < 2;++j) begin : g
+          for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice(REGISTER_1_BIT_FIELD_3_INITIAL_VALUE, 2, j)),
@@ -513,7 +513,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[9]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_4
           genvar j;
-          for (j = 0;j < 2;++j) begin : g
+          for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, j)),
@@ -579,7 +579,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[12]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_2
           genvar k;
-          for (k = 0;k < 2;++k) begin : g
+          for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (1),
               .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
@@ -603,7 +603,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[13]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_3
           genvar k;
-          for (k = 0;k < 2;++k) begin : g
+          for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice(REGISTER_2_BIT_FIELD_3_INITIAL_VALUE, 2, k)),
@@ -627,7 +627,7 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[14]).to generate_code(:register, :top_down, <<~'CODE')
         if (1) begin : g_bit_field_4
           genvar k;
-          for (k = 0;k < 2;++k) begin : g
+          for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field_rw_wo #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, k)),

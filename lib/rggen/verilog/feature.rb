@@ -3,6 +3,8 @@
 module RgGen
   module Verilog
     class Feature < SystemVerilog::RTL::Feature
+      include Utility
+
       private
 
       def create_variable(data_type, attributes, &block)

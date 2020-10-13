@@ -316,7 +316,7 @@ RSpec.describe 'register/verilog_top' do
       expect(registers[2]).to generate_code(:register_file, :top_down, <<~'CODE')
         generate if (1) begin : g_register_2
           genvar i;
-          for (i = 0;i < 4;++i) begin : g
+          for (i = 0;i < 4;i = i + 1) begin : g
             wire w_bit_field_valid;
             wire [31:0] w_bit_field_read_mask;
             wire [31:0] w_bit_field_write_mask;
@@ -396,8 +396,8 @@ RSpec.describe 'register/verilog_top' do
         generate if (1) begin : g_register_3
           genvar i;
           genvar j;
-          for (i = 0;i < 2;++i) begin : g
-            for (j = 0;j < 2;++j) begin : g
+          for (i = 0;i < 2;i = i + 1) begin : g
+            for (j = 0;j < 2;j = j + 1) begin : g
               wire [3:0] w_indirect_index;
               wire w_bit_field_valid;
               wire [31:0] w_bit_field_read_mask;
@@ -540,8 +540,8 @@ RSpec.describe 'register/verilog_top' do
         if (1) begin : g_register_0
           genvar k;
           genvar l;
-          for (k = 0;k < 2;++k) begin : g
-            for (l = 0;l < 2;++l) begin : g
+          for (k = 0;k < 2;k = k + 1) begin : g
+            for (l = 0;l < 2;l = l + 1) begin : g
               wire w_bit_field_valid;
               wire [31:0] w_bit_field_read_mask;
               wire [31:0] w_bit_field_write_mask;
