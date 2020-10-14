@@ -21,3 +21,7 @@ end
 
 require 'rggen/verilog'
 RgGen::Verilog.default_setup(builder)
+
+RGGEN_ROOT = ENV['RGGEN_ROOT'] || File.expand_path('../..', __dir__)
+RGGEN_VERILOG_ROOT = File.expand_path('..', __dir__)
+RGGEN_SAMPLE_DIRECTORY = File.join(RGGEN_ROOT, 'rggen-sample')

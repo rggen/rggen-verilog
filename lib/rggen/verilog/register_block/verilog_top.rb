@@ -42,6 +42,10 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
       }
     end
 
+    write_file '<%= register_block.name %>.v' do |file|
+      file.body(&method(:body_code))
+    end
+
     private
 
     def total_registers
@@ -58,6 +62,43 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
 
     def value_width
       register_block.registers.map(&:width).max
+    end
+
+    def body_code(code)
+      macro_definition(code)
+      verilog_module_definition(code)
+    end
+
+    def macro_definition(code)
+      template_path = File.join(__dir__, 'verilog_macros.erb')
+      code << process_template(template_path)
+    end
+
+    def verilog_module_definition(code)
+      code << module_definition(register_block.name) do |verilog_module|
+        verilog_module.parameters parameters
+        verilog_module.ports ports
+        verilog_module.variables variables
+        verilog_module.body(&method(:verilog_module_body))
+      end
+    end
+
+    def parameters
+      register_block.declarations[:parameter]
+    end
+
+    def ports
+      register_block.declarations[:port]
+    end
+
+    def variables
+      register_block.declarations[:variable]
+    end
+
+    def verilog_module_body(code)
+      { register_block: nil, register_file: 1 }.each do |kind, depth|
+        register_block.generate_code(code, kind, :top_down, depth)
+      end
     end
   end
 end
