@@ -197,7 +197,8 @@ RSpec.describe 'register_block/verilog_top' do
 
     let(:expected_code) do
       [
-        File.join(RGGEN_VERILOG_ROOT, 'sample', 'block_0.v')
+        File.join(RGGEN_VERILOG_ROOT, 'sample', 'block_0.v'),
+        File.join(RGGEN_VERILOG_ROOT, 'sample', 'block_1.v')
       ].map { |path| File.binread(path) }
     end
 
@@ -205,6 +206,10 @@ RSpec.describe 'register_block/verilog_top' do
       expect {
         register_blocks[0].write_file('foo')
       }.to write_file(match_string('foo/block_0.v'), expected_code[0])
+
+      expect {
+        register_blocks[1].write_file('bar')
+      }.to write_file(match_string('bar/block_1.v'), expected_code[1])
     end
   end
 end
