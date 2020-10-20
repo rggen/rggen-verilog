@@ -108,7 +108,7 @@ RSpec.describe 'register_block/protocol/apb' do
           .o_prdata               (o_prdata),
           .o_pslverr              (o_pslverr),
           .o_register_valid       (w_register_valid),
-          .o_register_write       (w_register_write),
+          .o_register_access      (w_register_access),
           .o_register_address     (w_register_address),
           .o_register_write_data  (w_register_write_data),
           .o_register_strobe      (w_register_strobe),

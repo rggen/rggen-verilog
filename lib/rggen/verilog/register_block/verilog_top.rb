@@ -13,8 +13,8 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
       wire :register_valid, {
         name: 'w_register_valid', width: 1
       }
-      wire :register_write, {
-        name: 'w_register_write', width: 1
+      wire :register_access, {
+        name: 'w_register_access', width: 2
       }
       wire :register_address, {
         name: 'w_register_address', width: address_width

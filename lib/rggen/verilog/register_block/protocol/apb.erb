@@ -22,7 +22,7 @@ rggen_apb_adapter #(
   .o_prdata               (<%= prdata %>),
   .o_pslverr              (<%= pslverr %>),
   .o_register_valid       (<%= register_block.register_valid %>),
-  .o_register_write       (<%= register_block.register_write %>),
+  .o_register_access      (<%= register_block.register_access %>),
   .o_register_address     (<%= register_block.register_address %>),
   .o_register_write_data  (<%= register_block.register_write_data %>),
   .o_register_strobe      (<%= register_block.register_strobe %>),

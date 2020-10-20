@@ -19,8 +19,8 @@ RgGen.define_list_feature(:register, :type) do
         register_block.register_valid
       end
 
-      def register_write
-        register_block.register_write
+      def register_access
+        register_block.register_access
       end
 
       def register_address

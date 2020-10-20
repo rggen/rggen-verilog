@@ -31,7 +31,7 @@ module block_1 #(
   output [3:0] o_register_file_2_register_file_0_register_1_bit_field_0
 );
   wire w_register_valid;
-  wire w_register_write;
+  wire [1:0] w_register_access;
   wire [6:0] w_register_address;
   wire [31:0] w_register_write_data;
   wire [3:0] w_register_strobe;
@@ -64,7 +64,7 @@ module block_1 #(
     .o_prdata               (o_prdata),
     .o_pslverr              (o_pslverr),
     .o_register_valid       (w_register_valid),
-    .o_register_write       (w_register_write),
+    .o_register_access      (w_register_access),
     .o_register_address     (w_register_address),
     .o_register_write_data  (w_register_write_data),
     .o_register_strobe      (w_register_strobe),
@@ -94,7 +94,7 @@ module block_1 #(
         .i_clk                  (i_clk),
         .i_rst_n                (i_rst_n),
         .i_register_valid       (w_register_valid),
-        .i_register_write       (w_register_write),
+        .i_register_access      (w_register_access),
         .i_register_address     (w_register_address),
         .i_register_write_data  (w_register_write_data),
         .i_register_strobe      (w_register_strobe),
@@ -149,7 +149,7 @@ module block_1 #(
         .i_clk                  (i_clk),
         .i_rst_n                (i_rst_n),
         .i_register_valid       (w_register_valid),
-        .i_register_write       (w_register_write),
+        .i_register_access      (w_register_access),
         .i_register_address     (w_register_address),
         .i_register_write_data  (w_register_write_data),
         .i_register_strobe      (w_register_strobe),
@@ -211,7 +211,7 @@ module block_1 #(
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
           .i_register_valid       (w_register_valid),
-          .i_register_write       (w_register_write),
+          .i_register_access      (w_register_access),
           .i_register_address     (w_register_address),
           .i_register_write_data  (w_register_write_data),
           .i_register_strobe      (w_register_strobe),
@@ -273,7 +273,7 @@ module block_1 #(
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
           .i_register_valid       (w_register_valid),
-          .i_register_write       (w_register_write),
+          .i_register_access      (w_register_access),
           .i_register_address     (w_register_address),
           .i_register_write_data  (w_register_write_data),
           .i_register_strobe      (w_register_strobe),
@@ -339,7 +339,7 @@ module block_1 #(
                 .i_clk                  (i_clk),
                 .i_rst_n                (i_rst_n),
                 .i_register_valid       (w_register_valid),
-                .i_register_write       (w_register_write),
+                .i_register_access      (w_register_access),
                 .i_register_address     (w_register_address),
                 .i_register_write_data  (w_register_write_data),
                 .i_register_strobe      (w_register_strobe),
@@ -439,7 +439,7 @@ module block_1 #(
             .i_clk                  (i_clk),
             .i_rst_n                (i_rst_n),
             .i_register_valid       (w_register_valid),
-            .i_register_write       (w_register_write),
+            .i_register_access      (w_register_access),
             .i_register_address     (w_register_address),
             .i_register_write_data  (w_register_write_data),
             .i_register_strobe      (w_register_strobe),

@@ -53,8 +53,8 @@ RSpec.describe 'register_block/verilog_top' do
         name: 'w_register_valid', width: 1
       )
       expect(register_block).to have_wire(
-        :register_write,
-        name: 'w_register_write', width: 1
+        :register_access,
+        name: 'w_register_access', width: 2
       )
       expect(register_block).to have_wire(
         :register_address,
