@@ -10,7 +10,7 @@ require_relative 'verilog/factories'
 
 module RgGen
   module Verilog
-    PLUGIN_NAME = :verilog
+    PLUGIN_NAME = :'rggen-verilog'
 
     FEATURES = [
       'verilog/bit_field/type',
