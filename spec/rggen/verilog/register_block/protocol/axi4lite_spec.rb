@@ -58,7 +58,7 @@ RSpec.describe 'register_block/protocol/axi4lite' do
     )
     expect(register_block).to have_port(
       :awid,
-      name: 'i_awid', direction: :input, width: 'ID_WIDTH'
+      name: 'i_awid', direction: :input, width: '((ID_WIDTH == 0) ? 1 : ID_WIDTH)'
     )
     expect(register_block).to have_port(
       :awaddr,
@@ -94,7 +94,7 @@ RSpec.describe 'register_block/protocol/axi4lite' do
     )
     expect(register_block).to have_port(
       :bid,
-      name: 'o_bid', direction: :output, width: 'ID_WIDTH'
+      name: 'o_bid', direction: :output, width: '((ID_WIDTH == 0) ? 1 : ID_WIDTH)'
     )
     expect(register_block).to have_port(
       :bresp,
@@ -110,7 +110,7 @@ RSpec.describe 'register_block/protocol/axi4lite' do
     )
     expect(register_block).to have_port(
       :arid,
-      name: 'i_arid', direction: :input, width: 'ID_WIDTH'
+      name: 'i_arid', direction: :input, width: '((ID_WIDTH == 0) ? 1 : ID_WIDTH)'
     )
     expect(register_block).to have_port(
       :araddr,
@@ -130,7 +130,7 @@ RSpec.describe 'register_block/protocol/axi4lite' do
     )
     expect(register_block).to have_port(
       :rid,
-      name: 'o_rid', direction: :output, width: 'ID_WIDTH'
+      name: 'o_rid', direction: :output, width: '((ID_WIDTH == 0) ? 1 : ID_WIDTH)'
     )
     expect(register_block).to have_port(
       :rdata,

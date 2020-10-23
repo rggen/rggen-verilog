@@ -17,7 +17,7 @@ RgGen.define_list_item_feature(:register_block, :protocol, :axi4lite) do
         name: 'o_awready', width: 1
       }
       input :awid, {
-        name: 'i_awid', width: id_width
+        name: 'i_awid', width: id_width_value
       }
       input :awaddr, {
         name: 'i_awaddr', width: address_width
@@ -44,7 +44,7 @@ RgGen.define_list_item_feature(:register_block, :protocol, :axi4lite) do
         name: 'i_bready', width: 1
       }
       output :bid, {
-        name: 'o_bid', width: id_width
+        name: 'o_bid', width: id_width_value
       }
       output :bresp, {
         name: 'o_bresp', width: 2
@@ -56,7 +56,7 @@ RgGen.define_list_item_feature(:register_block, :protocol, :axi4lite) do
         name: 'o_arready', width: 1
       }
       input :arid, {
-        name: 'i_arid', width: id_width
+        name: 'i_arid', width: id_width_value
       }
       input :araddr, {
         name: 'i_araddr', width: address_width
@@ -71,7 +71,7 @@ RgGen.define_list_item_feature(:register_block, :protocol, :axi4lite) do
         name: 'i_rready', width: 1
       }
       output :rid, {
-        name: 'o_rid', width: id_width
+        name: 'o_rid', width: id_width_value
       }
       output :rdata, {
         name: 'o_rdata', width: bus_width
@@ -82,5 +82,11 @@ RgGen.define_list_item_feature(:register_block, :protocol, :axi4lite) do
     end
 
     main_code :register_block, from_template: true
+
+    private
+
+    def id_width_value
+      "((#{id_width} == 0) ? 1 : #{id_width})"
+    end
   end
 end
