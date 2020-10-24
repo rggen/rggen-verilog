@@ -1,39 +1,73 @@
-# Rggen::Verilog
+[![Gem Version](https://badge.fury.io/rb/rggen-verilog.svg)](https://badge.fury.io/rb/rggen-verilog)
+[![CI](https://github.com/rggen/rggen-verilog/workflows/CI/badge.svg)](https://github.com/rggen/rggen-verilog/actions?query=workflow%3ACI)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7a4090f4a7c21d29036c/maintainability)](https://codeclimate.com/github/rggen/rggen-verilog/maintainability)
+[![codecov](https://codecov.io/gh/rggen/rggen-verilog/branch/master/graph/badge.svg)](https://codecov.io/gh/rggen/rggen-verilog)
+[![Gitter](https://badges.gitter.im/rggen/rggen.svg)](https://gitter.im/rggen/rggen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rggen/verilog`. To experiment with that code, run `bin/console` for an interactive prompt.
+# RgGen::Verilog
 
-TODO: Delete this and the text above, and describe your gem
+RgGen::Verilog is a RgGen plugin to generate RTL written in Verilog.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To install RgGen::Verilog, use the following command:
 
-```ruby
-gem 'rggen-verilog'
 ```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install rggen-verilog
+$ gem install rggen-verilog
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+You need to tell RgGen to load RgGen::Verilog plugin. There are two ways.
 
-## Development
+### Using `--plugin` runtime option
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+$ rggen --plugin rggen-verilog your_register_map.yml
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Using `RGGEN_PLUGINS` environment variable
 
-## Contributing
+```
+$ export RGGEN_PLUGINS=${RGGEN_PLUGINS}:rggen-verilog
+$ rggen your_register_map.yml
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rggen-verilog. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rggen-verilog/blob/master/CODE_OF_CONDUCT.md).
+## Using Generated RTL
 
+Generated RTL files are constructed by using common Verilog modules.
+You need to get them from GitHub repository and set an environment variable to show their location.
+
+* GitHub repository
+    * https://github.com/rggen/rggen-verilog-rtl.git
+* Environment Variable
+    * RGGEN_VERILOG_RTL_ROOT
+
+```
+$ git clone https://github.com/rggen/rggen-verilog-rtl.git
+$ export RGGEN_VERILOG_RTL_ROOT=`pwd`/rggen-verilog-rtl
+```
+
+Then, you can use generated RTL files with your deisgn. This is an example command.
+
+```
+$ simulator \
+    -f ${RGGEN_VERILOG_RTL_ROOT}/compile.f
+    your_csr_0.v your_csr_1.v your_design.v
+```
+
+## Contact
+
+Feedbacks, bus reports, questions and etc. are welcome! You can post them bu using following ways:
+
+* [GitHub Issue Tracker](https://github.com/rggen/rggen-verilog/issues)
+* [Chat Room](https://gitter.im/rggen/rggen)
+* [Mailing List](https://groups.google.com/d/forum/rggen)
+* [Mail](mailto:rggen@googlegroups.com)
+
+## Copyright & License
+
+Copyright &copy; 2020 Taichi Ishitani. RgGen::Verilog is licensed under the [MIT License](https://opensource.org/licenses/MIT), see [LICENSE](LICENSE) for futher details.
 
 ## License
 
@@ -41,4 +75,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Rggen::Verilog project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rggen-verilog/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the RgGen::Verilog project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rggen/rggen-verilog/blob/master/CODE_OF_CONDUCT.md).
