@@ -1,19 +1,24 @@
-<%= module_name %> #(
-<% if bit_field.type != :rs %>
-  .SET_VALUE      (<%= set_value %>),
-  .WRITE_ONLY     (<%= write_only %>),
-<% end %>
-  .WIDTH          (<%= width %>),
-  .INITIAL_VALUE  (<%= initial_value %>)
+rggen_bit_field #(
+  .WIDTH            (<%= width %>),
+  .INITIAL_VALUE    (<%= initial_value %>),
+  .SW_READ_ACTION   (<%= read_action %>),
+  .SW_WRITE_ACTION  (<%= write_action %>)
 ) u_bit_field (
-  .i_clk                  (<%= clock %>),
-  .i_rst_n                (<%= reset %>),
-  .i_bit_field_valid      (<%= bit_field_valid %>),
-  .i_bit_field_read_mask  (<%= bit_field_read_mask %>),
-  .i_bit_field_write_mask (<%= bit_field_write_mask %>),
-  .i_bit_field_write_data (<%= bit_field_write_data %>),
-  .o_bit_field_read_data  (<%= bit_field_read_data %>),
-  .o_bit_field_value      (<%= bit_field_value %>),
-  .i_clear                (<%= clear[loop_variables] %>),
-  .o_value                (<%= value_out[loop_variables] %>)
+  .i_clk              (<%= clock %>),
+  .i_rst_n            (<%= reset %>),
+  .i_sw_valid         (<%= bit_field_valid %>),
+  .i_sw_read_mask     (<%= bit_field_read_mask %>),
+  .i_sw_write_enable  (<%= write_enable %>),
+  .i_sw_write_mask    (<%= bit_field_write_mask %>),
+  .i_sw_write_data    (<%= bit_field_write_data %>),
+  .o_sw_read_data     (<%= bit_field_read_data %>),
+  .o_sw_value         (<%= bit_field_value %>),
+  .i_hw_write_enable  (1'b0),
+  .i_hw_write_data    (<%= fill_0(width) %>),
+  .i_hw_set           (<%= fill_0(width) %>),
+  .i_hw_clear         (<%= clear[loop_variables] %>),
+  .i_value            (<%= fill_0(width) %>),
+  .i_mask             (<%= mask %>),
+  .o_value            (<%= value_out[loop_variables] %>),
+  .o_value_unmasked   ()
 );

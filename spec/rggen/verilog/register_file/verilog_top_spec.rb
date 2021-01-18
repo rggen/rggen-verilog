@@ -122,21 +122,29 @@ RSpec.describe 'register_file/verilog_top' do
               .i_bit_field_value      (w_bit_field_value)
             );
             if (1) begin : g_bit_field_0
-              rggen_bit_field_rw_wo #(
+              rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .WRITE_ONLY     (0),
-                .WRITE_ONCE     (0)
+                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                .SW_WRITE_ONCE  (0)
               ) u_bit_field (
-                .i_clk                  (i_clk),
-                .i_rst_n                (i_rst_n),
-                .i_bit_field_valid      (w_bit_field_valid),
-                .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                .o_bit_field_value      (w_bit_field_value[0+:1]),
-                .o_value                (o_register_file_0_register_0_bit_field_0)
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                .o_sw_value         (w_bit_field_value[0+:1]),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({1{1'b0}}),
+                .i_hw_set           ({1{1'b0}}),
+                .i_hw_clear         ({1{1'b0}}),
+                .i_value            ({1{1'b0}}),
+                .i_mask             ({1{1'b1}}),
+                .o_value            (o_register_file_0_register_0_bit_field_0),
+                .o_value_unmasked   ()
               );
             end
           end
@@ -177,21 +185,29 @@ RSpec.describe 'register_file/verilog_top' do
               .i_bit_field_value      (w_bit_field_value)
             );
             if (1) begin : g_bit_field_0
-              rggen_bit_field_rw_wo #(
+              rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .WRITE_ONLY     (0),
-                .WRITE_ONCE     (0)
+                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                .SW_WRITE_ONCE  (0)
               ) u_bit_field (
-                .i_clk                  (i_clk),
-                .i_rst_n                (i_rst_n),
-                .i_bit_field_valid      (w_bit_field_valid),
-                .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                .o_bit_field_value      (w_bit_field_value[0+:1]),
-                .o_value                (o_register_file_0_register_1_bit_field_0)
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                .o_sw_value         (w_bit_field_value[0+:1]),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({1{1'b0}}),
+                .i_hw_set           ({1{1'b0}}),
+                .i_hw_clear         ({1{1'b0}}),
+                .i_value            ({1{1'b0}}),
+                .i_mask             ({1{1'b1}}),
+                .o_value            (o_register_file_0_register_1_bit_field_0),
+                .o_value_unmasked   ()
               );
             end
           end
@@ -238,21 +254,29 @@ RSpec.describe 'register_file/verilog_top' do
                 .i_bit_field_value      (w_bit_field_value)
               );
               if (1) begin : g_bit_field_0
-                rggen_bit_field_rw_wo #(
+                rggen_bit_field #(
                   .WIDTH          (1),
                   .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                  .WRITE_ONLY     (0),
-                  .WRITE_ONCE     (0)
+                  .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                  .SW_WRITE_ONCE  (0)
                 ) u_bit_field (
-                  .i_clk                  (i_clk),
-                  .i_rst_n                (i_rst_n),
-                  .i_bit_field_valid      (w_bit_field_valid),
-                  .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                  .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                  .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                  .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                  .o_bit_field_value      (w_bit_field_value[0+:1]),
-                  .o_value                (o_register_file_1_register_file_0_register_0_bit_field_0)
+                  .i_clk              (i_clk),
+                  .i_rst_n            (i_rst_n),
+                  .i_sw_valid         (w_bit_field_valid),
+                  .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                  .i_sw_write_enable  (1'b1),
+                  .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                  .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                  .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                  .o_sw_value         (w_bit_field_value[0+:1]),
+                  .i_hw_write_enable  (1'b0),
+                  .i_hw_write_data    ({1{1'b0}}),
+                  .i_hw_set           ({1{1'b0}}),
+                  .i_hw_clear         ({1{1'b0}}),
+                  .i_value            ({1{1'b0}}),
+                  .i_mask             ({1{1'b1}}),
+                  .o_value            (o_register_file_1_register_file_0_register_0_bit_field_0),
+                  .o_value_unmasked   ()
                 );
               end
             end
@@ -294,21 +318,29 @@ RSpec.describe 'register_file/verilog_top' do
               .i_bit_field_value      (w_bit_field_value)
             );
             if (1) begin : g_bit_field_0
-              rggen_bit_field_rw_wo #(
+              rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .WRITE_ONLY     (0),
-                .WRITE_ONCE     (0)
+                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                .SW_WRITE_ONCE  (0)
               ) u_bit_field (
-                .i_clk                  (i_clk),
-                .i_rst_n                (i_rst_n),
-                .i_bit_field_valid      (w_bit_field_valid),
-                .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                .o_bit_field_value      (w_bit_field_value[0+:1]),
-                .o_value                (o_register_file_1_register_1_bit_field_0)
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                .o_sw_value         (w_bit_field_value[0+:1]),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({1{1'b0}}),
+                .i_hw_set           ({1{1'b0}}),
+                .i_hw_clear         ({1{1'b0}}),
+                .i_value            ({1{1'b0}}),
+                .i_mask             ({1{1'b1}}),
+                .o_value            (o_register_file_1_register_1_bit_field_0),
+                .o_value_unmasked   ()
               );
             end
           end
@@ -363,21 +395,29 @@ RSpec.describe 'register_file/verilog_top' do
                         .i_bit_field_value      (w_bit_field_value)
                       );
                       if (1) begin : g_bit_field_0
-                        rggen_bit_field_rw_wo #(
+                        rggen_bit_field #(
                           .WIDTH          (1),
                           .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                          .WRITE_ONLY     (0),
-                          .WRITE_ONCE     (0)
+                          .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                          .SW_WRITE_ONCE  (0)
                         ) u_bit_field (
-                          .i_clk                  (i_clk),
-                          .i_rst_n                (i_rst_n),
-                          .i_bit_field_valid      (w_bit_field_valid),
-                          .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                          .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                          .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                          .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                          .o_bit_field_value      (w_bit_field_value[0+:1]),
-                          .o_value                (o_register_file_2_register_file_0_register_0_bit_field_0[1*(8*i+4*j+2*k+l)+:1])
+                          .i_clk              (i_clk),
+                          .i_rst_n            (i_rst_n),
+                          .i_sw_valid         (w_bit_field_valid),
+                          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                          .i_sw_write_enable  (1'b1),
+                          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                          .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                          .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                          .o_sw_value         (w_bit_field_value[0+:1]),
+                          .i_hw_write_enable  (1'b0),
+                          .i_hw_write_data    ({1{1'b0}}),
+                          .i_hw_set           ({1{1'b0}}),
+                          .i_hw_clear         ({1{1'b0}}),
+                          .i_value            ({1{1'b0}}),
+                          .i_mask             ({1{1'b1}}),
+                          .o_value            (o_register_file_2_register_file_0_register_0_bit_field_0[1*(8*i+4*j+2*k+l)+:1]),
+                          .o_value_unmasked   ()
                         );
                       end
                     end
@@ -425,21 +465,29 @@ RSpec.describe 'register_file/verilog_top' do
                       .i_bit_field_value      (w_bit_field_value)
                     );
                     if (1) begin : g_bit_field_0
-                      rggen_bit_field_rw_wo #(
+                      rggen_bit_field #(
                         .WIDTH          (1),
                         .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                        .WRITE_ONLY     (0),
-                        .WRITE_ONCE     (0)
+                        .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
+                        .SW_WRITE_ONCE  (0)
                       ) u_bit_field (
-                        .i_clk                  (i_clk),
-                        .i_rst_n                (i_rst_n),
-                        .i_bit_field_valid      (w_bit_field_valid),
-                        .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-                        .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-                        .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-                        .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-                        .o_bit_field_value      (w_bit_field_value[0+:1]),
-                        .o_value                (o_register_file_2_register_1_bit_field_0[1*(8*i+4*j+2*k+l)+:1])
+                        .i_clk              (i_clk),
+                        .i_rst_n            (i_rst_n),
+                        .i_sw_valid         (w_bit_field_valid),
+                        .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+                        .i_sw_write_enable  (1'b1),
+                        .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+                        .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+                        .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+                        .o_sw_value         (w_bit_field_value[0+:1]),
+                        .i_hw_write_enable  (1'b0),
+                        .i_hw_write_data    ({1{1'b0}}),
+                        .i_hw_set           ({1{1'b0}}),
+                        .i_hw_clear         ({1{1'b0}}),
+                        .i_value            ({1{1'b0}}),
+                        .i_mask             ({1{1'b1}}),
+                        .o_value            (o_register_file_2_register_1_bit_field_0[1*(8*i+4*j+2*k+l)+:1]),
+                        .o_value_unmasked   ()
                       );
                     end
                   end

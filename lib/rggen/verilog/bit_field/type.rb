@@ -59,7 +59,7 @@ RgGen.define_list_feature(:bit_field, :type) do
       end
 
       def mask
-        reference_bit_field || hex(2**width - 1, width)
+        reference_bit_field || fill_1(width)
       end
 
       def reference_bit_field

@@ -317,232 +317,304 @@ RSpec.describe 'bit_field/type/rws' do
   end
 
   describe '#generate_code' do
-    it 'rggen_bit_field_rwsをインスタンスするコードを出力する' do
+    it 'rggen_bit_fieldをインスタンスするコードを出力する' do
       expect(bit_fields[0]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (1),
           .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-          .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-          .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-          .o_bit_field_value      (w_bit_field_value[0+:1]),
-          .i_set                  (i_register_0_bit_field_0_set),
-          .i_value                (i_register_0_bit_field_0),
-          .o_value                (o_register_0_bit_field_0)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+          .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+          .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+          .o_sw_value         (w_bit_field_value[0+:1]),
+          .i_hw_write_enable  (i_register_0_bit_field_0_set),
+          .i_hw_write_data    (i_register_0_bit_field_0),
+          .i_hw_set           ({1{1'b0}}),
+          .i_hw_clear         ({1{1'b0}}),
+          .i_value            ({1{1'b0}}),
+          .i_mask             ({1{1'b1}}),
+          .o_value            (o_register_0_bit_field_0),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[1]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (1),
           .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[1+:1]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[1+:1]),
-          .i_bit_field_write_data (w_bit_field_write_data[1+:1]),
-          .o_bit_field_read_data  (w_bit_field_read_data[1+:1]),
-          .o_bit_field_value      (w_bit_field_value[1+:1]),
-          .i_set                  (w_register_value[800+:1]),
-          .i_value                (i_register_0_bit_field_1),
-          .o_value                (o_register_0_bit_field_1)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[1+:1]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[1+:1]),
+          .i_sw_write_data    (w_bit_field_write_data[1+:1]),
+          .o_sw_read_data     (w_bit_field_read_data[1+:1]),
+          .o_sw_value         (w_bit_field_value[1+:1]),
+          .i_hw_write_enable  (w_register_value[800+:1]),
+          .i_hw_write_data    (i_register_0_bit_field_1),
+          .i_hw_set           ({1{1'b0}}),
+          .i_hw_clear         ({1{1'b0}}),
+          .i_value            ({1{1'b0}}),
+          .i_mask             ({1{1'b1}}),
+          .o_value            (o_register_0_bit_field_1),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[2]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (2),
           .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[4+:2]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[4+:2]),
-          .i_bit_field_write_data (w_bit_field_write_data[4+:2]),
-          .o_bit_field_read_data  (w_bit_field_read_data[4+:2]),
-          .o_bit_field_value      (w_bit_field_value[4+:2]),
-          .i_set                  (i_register_0_bit_field_2_set),
-          .i_value                (i_register_0_bit_field_2),
-          .o_value                (o_register_0_bit_field_2)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[4+:2]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[4+:2]),
+          .i_sw_write_data    (w_bit_field_write_data[4+:2]),
+          .o_sw_read_data     (w_bit_field_read_data[4+:2]),
+          .o_sw_value         (w_bit_field_value[4+:2]),
+          .i_hw_write_enable  (i_register_0_bit_field_2_set),
+          .i_hw_write_data    (i_register_0_bit_field_2),
+          .i_hw_set           ({2{1'b0}}),
+          .i_hw_clear         ({2{1'b0}}),
+          .i_value            ({2{1'b0}}),
+          .i_mask             ({2{1'b1}}),
+          .o_value            (o_register_0_bit_field_2),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[3]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (2),
           .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[6+:2]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[6+:2]),
-          .i_bit_field_write_data (w_bit_field_write_data[6+:2]),
-          .o_bit_field_read_data  (w_bit_field_read_data[6+:2]),
-          .o_bit_field_value      (w_bit_field_value[6+:2]),
-          .i_set                  (w_register_value[800+:1]),
-          .i_value                (i_register_0_bit_field_3),
-          .o_value                (o_register_0_bit_field_3)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[6+:2]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[6+:2]),
+          .i_sw_write_data    (w_bit_field_write_data[6+:2]),
+          .o_sw_read_data     (w_bit_field_read_data[6+:2]),
+          .o_sw_value         (w_bit_field_value[6+:2]),
+          .i_hw_write_enable  (w_register_value[800+:1]),
+          .i_hw_write_data    (i_register_0_bit_field_3),
+          .i_hw_set           ({2{1'b0}}),
+          .i_hw_clear         ({2{1'b0}}),
+          .i_value            ({2{1'b0}}),
+          .i_mask             ({2{1'b1}}),
+          .o_value            (o_register_0_bit_field_3),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[4]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*i+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*i+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*i+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*i+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*i+:4]),
-          .i_set                  (i_register_0_bit_field_4_set[1*(i)+:1]),
-          .i_value                (i_register_0_bit_field_4[4*(i)+:4]),
-          .o_value                (o_register_0_bit_field_4[4*(i)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*i+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*i+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*i+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*i+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*i+:4]),
+          .i_hw_write_enable  (i_register_0_bit_field_4_set[1*(i)+:1]),
+          .i_hw_write_data    (i_register_0_bit_field_4[4*(i)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_0_bit_field_4[4*(i)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[5]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[20+8*i+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[20+8*i+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[20+8*i+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[20+8*i+:4]),
-          .o_bit_field_value      (w_bit_field_value[20+8*i+:4]),
-          .i_set                  (w_register_value[800+:1]),
-          .i_value                (i_register_0_bit_field_5[4*(i)+:4]),
-          .o_value                (o_register_0_bit_field_5[4*(i)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[20+8*i+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[20+8*i+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[20+8*i+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[20+8*i+:4]),
+          .o_sw_value         (w_bit_field_value[20+8*i+:4]),
+          .i_hw_write_enable  (w_register_value[800+:1]),
+          .i_hw_write_data    (i_register_0_bit_field_5[4*(i)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_0_bit_field_5[4*(i)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[10]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*j+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*j+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*j+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*j+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*j+:4]),
-          .i_set                  (i_register_1_bit_field_4_set[1*(2*i+j)+:1]),
-          .i_value                (i_register_1_bit_field_4[4*(2*i+j)+:4]),
-          .o_value                (o_register_1_bit_field_4[4*(2*i+j)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*j+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*j+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*j+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*j+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*j+:4]),
+          .i_hw_write_enable  (i_register_1_bit_field_4_set[1*(2*i+j)+:1]),
+          .i_hw_write_data    (i_register_1_bit_field_4[4*(2*i+j)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_1_bit_field_4[4*(2*i+j)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[11]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[20+8*j+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[20+8*j+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[20+8*j+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[20+8*j+:4]),
-          .o_bit_field_value      (w_bit_field_value[20+8*j+:4]),
-          .i_set                  (w_register_value[800+:1]),
-          .i_value                (i_register_1_bit_field_5[4*(2*i+j)+:4]),
-          .o_value                (o_register_1_bit_field_5[4*(2*i+j)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[20+8*j+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[20+8*j+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[20+8*j+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[20+8*j+:4]),
+          .o_sw_value         (w_bit_field_value[20+8*j+:4]),
+          .i_hw_write_enable  (w_register_value[800+:1]),
+          .i_hw_write_data    (i_register_1_bit_field_5[4*(2*i+j)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_1_bit_field_5[4*(2*i+j)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[16]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*k+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*k+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*k+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*k+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*k+:4]),
-          .i_set                  (i_register_2_bit_field_4_set[1*(4*i+2*j+k)+:1]),
-          .i_value                (i_register_2_bit_field_4[4*(4*i+2*j+k)+:4]),
-          .o_value                (o_register_2_bit_field_4[4*(4*i+2*j+k)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*k+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*k+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*k+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*k+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*k+:4]),
+          .i_hw_write_enable  (i_register_2_bit_field_4_set[1*(4*i+2*j+k)+:1]),
+          .i_hw_write_data    (i_register_2_bit_field_4[4*(4*i+2*j+k)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_2_bit_field_4[4*(4*i+2*j+k)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[17]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[20+8*k+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[20+8*k+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[20+8*k+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[20+8*k+:4]),
-          .o_bit_field_value      (w_bit_field_value[20+8*k+:4]),
-          .i_set                  (w_register_value[800+:1]),
-          .i_value                (i_register_2_bit_field_5[4*(4*i+2*j+k)+:4]),
-          .o_value                (o_register_2_bit_field_5[4*(4*i+2*j+k)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[20+8*k+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[20+8*k+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[20+8*k+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[20+8*k+:4]),
+          .o_sw_value         (w_bit_field_value[20+8*k+:4]),
+          .i_hw_write_enable  (w_register_value[800+:1]),
+          .i_hw_write_data    (i_register_2_bit_field_5[4*(4*i+2*j+k)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_2_bit_field_5[4*(4*i+2*j+k)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[22]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*m+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*m+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*m+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*m+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*m+:4]),
-          .i_set                  (i_register_file_3_register_file_0_register_0_bit_field_4_set[1*(16*i+8*j+4*k+2*l+m)+:1]),
-          .i_value                (i_register_file_3_register_file_0_register_0_bit_field_4[4*(16*i+8*j+4*k+2*l+m)+:4]),
-          .o_value                (o_register_file_3_register_file_0_register_0_bit_field_4[4*(16*i+8*j+4*k+2*l+m)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*m+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*m+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*m+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*m+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*m+:4]),
+          .i_hw_write_enable  (i_register_file_3_register_file_0_register_0_bit_field_4_set[1*(16*i+8*j+4*k+2*l+m)+:1]),
+          .i_hw_write_data    (i_register_file_3_register_file_0_register_0_bit_field_4[4*(16*i+8*j+4*k+2*l+m)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_file_3_register_file_0_register_0_bit_field_4[4*(16*i+8*j+4*k+2*l+m)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
 
       expect(bit_fields[23]).to generate_code(:bit_field, :top_down, <<~'CODE')
-        rggen_bit_field_rws #(
+        rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0))
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[20+8*m+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[20+8*m+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[20+8*m+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[20+8*m+:4]),
-          .o_bit_field_value      (w_bit_field_value[20+8*m+:4]),
-          .i_set                  (w_register_value[32*(26+2*i+j)+0+:1]),
-          .i_value                (i_register_file_3_register_file_0_register_0_bit_field_5[4*(16*i+8*j+4*k+2*l+m)+:4]),
-          .o_value                (o_register_file_3_register_file_0_register_0_bit_field_5[4*(16*i+8*j+4*k+2*l+m)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[20+8*m+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[20+8*m+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[20+8*m+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[20+8*m+:4]),
+          .o_sw_value         (w_bit_field_value[20+8*m+:4]),
+          .i_hw_write_enable  (w_register_value[32*(26+2*i+j)+0+:1]),
+          .i_hw_write_data    (i_register_file_3_register_file_0_register_0_bit_field_5[4*(16*i+8*j+4*k+2*l+m)+:4]),
+          .i_hw_set           ({4{1'b0}}),
+          .i_hw_clear         ({4{1'b0}}),
+          .i_value            ({4{1'b0}}),
+          .i_mask             ({4{1'b1}}),
+          .o_value            (o_register_file_3_register_file_0_register_0_bit_field_5[4*(16*i+8*j+4*k+2*l+m)+:4]),
+          .o_value_unmasked   ()
         );
       CODE
     end
