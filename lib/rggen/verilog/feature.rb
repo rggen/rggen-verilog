@@ -12,12 +12,12 @@ module RgGen
         super
       end
 
-      def create_argument(direction, attributes, &block)
+      def create_port(direction, attributes, &block)
         attributes =
           attributes
-            .reject { |key, _| key == :data_type }
-            .merge(array_format: :serialized)
-        super
+            .except(:data_type)
+            .merge(direction: direction, array_format: :serialized)
+        DataObject.new(:argument, attributes, &block)
       end
 
       def create_parameter(parameter_type, attributes, &block)

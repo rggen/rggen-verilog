@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
     `git ls-files lib LICENSE CODE_OF_CONDUCT.md README.md`.split($RS)
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.4.0'
+  spec.required_ruby_version = '>= 2.5'
 
   spec.add_runtime_dependency 'rggen-systemverilog', '>= 0.24.0'
   spec.add_development_dependency 'bundler'
