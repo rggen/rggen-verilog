@@ -2,7 +2,7 @@
 
 module RgGen
   module Verilog
-    class ComponentFactory < Core::OutputBase::ComponentFactory
+    class ComponentFactory < Core::OutputBase::SourceFileComponentFactory
     end
 
     class FeatureFactory < Core::OutputBase::FeatureFactory
