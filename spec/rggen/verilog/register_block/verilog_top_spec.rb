@@ -197,8 +197,8 @@ RSpec.describe 'register_block/verilog_top' do
 
     let(:expected_code) do
       [
-        File.join(RGGEN_VERILOG_ROOT, 'sample', 'block_0.v'),
-        File.join(RGGEN_VERILOG_ROOT, 'sample', 'block_1.v')
+        File.join(RGGEN_SAMPLE_DIRECTORY, 'block_0.v'),
+        File.join(RGGEN_SAMPLE_DIRECTORY, 'block_1.v')
       ].map { |path| File.binread(path) }
     end
 
