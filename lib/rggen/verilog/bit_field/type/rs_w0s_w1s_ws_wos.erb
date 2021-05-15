@@ -18,7 +18,7 @@ rggen_bit_field #(
   .i_hw_set           (<%= fill_0(width) %>),
   .i_hw_clear         (<%= clear[loop_variables] %>),
   .i_value            (<%= fill_0(width) %>),
-  .i_mask             (<%= mask %>),
+  .i_mask             (<%= fill_1(width) %>),
   .o_value            (<%= value_out[loop_variables] %>),
   .o_value_unmasked   ()
 );
