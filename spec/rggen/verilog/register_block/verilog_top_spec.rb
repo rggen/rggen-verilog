@@ -5,19 +5,6 @@ RSpec.describe 'register_block/verilog_top' do
   include_context 'clean-up builder'
 
   before(:all) do
-    RgGen.enable(:global, [:address_width, :bus_width])
-    RgGen.enable(:register_block, [:name, :byte_size])
-    RgGen.enable(:register_file, [:name, :offset_address, :size])
-    RgGen.enable(:register, [:name, :offset_address, :size, :type])
-    RgGen.enable(:bit_field, [:name, :bit_assignment, :type, :initial_value])
-    RgGen.enable(:bit_field, :type, [:rw])
-    RgGen.enable(:register_block, [:verilog_top])
-    RgGen.enable(:register_file, [:verilog_top])
-    RgGen.enable(:register, [:verilog_top])
-    RgGen.enable(:bit_field, [:verilog_top])
-  end
-
-  before(:all) do
     load_setup_files(RgGen.builder, [
       File.join(RGGEN_ROOT, 'rggen-default-register-map/lib/rggen/default_register_map/setup.rb'),
       File.join(RGGEN_VERILOG_ROOT, 'lib/rggen/verilog/setup.rb')
