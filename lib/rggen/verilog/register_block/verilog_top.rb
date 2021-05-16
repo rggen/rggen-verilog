@@ -88,7 +88,20 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
     end
 
     def ports
-      register_block.declarations[:port]
+      register_block
+        .declarations[:port]
+        .yield_self(&method(:sort_port_declarations))
+    end
+
+    def sort_port_declarations(declarations)
+      declarations
+        .partition(&method(:clock_or_reset?))
+        .flatten
+    end
+
+    def clock_or_reset?(declaration)
+      [clock.to_s, reset.to_s]
+        .any? { |port_name| declaration.include?(port_name) }
     end
 
     def variables
