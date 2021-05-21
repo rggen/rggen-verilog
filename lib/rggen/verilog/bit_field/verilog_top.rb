@@ -60,7 +60,7 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       if !bit_field.initial_value_array?
         sized_initial_value
       elsif bit_field.fixed_initial_value?
-        concat(sized_initial_values)
+        merged_initial_values
       else
         repeat(bit_field.sequence_size, sized_initial_value)
       end
@@ -70,11 +70,13 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       hex(bit_field.register_map.initial_value, bit_field.width)
     end
 
-    def sized_initial_values
-      bit_field
-        .initial_values
-        .reverse
-        .map { |v| hex(v, bit_field.width) }
+    def merged_initial_values
+      value =
+        bit_field
+          .initial_values
+          .map.with_index { |v, i| v << (i * bit_field.width) }
+          .inject(:|)
+      hex(value, bit_field.width * bit_field.sequence_size)
     end
 
     def loop_size
