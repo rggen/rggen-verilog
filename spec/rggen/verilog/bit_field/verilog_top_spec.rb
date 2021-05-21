@@ -84,7 +84,7 @@ RSpec.describe 'bit_field/verilog_top' do
 
   context '配列化された初期値が指定されている場合' do
     describe '#initial_value' do
-      it '配列の各要素の連接を初期値リテラルとして返す' do
+      it '配列の各要素を結合した値を初期値リテラルとして返す' do
         bit_fields = create_bit_fields do
           name 'block_0'
           byte_size 256
@@ -123,14 +123,14 @@ RSpec.describe 'bit_field/verilog_top' do
           end
         end
 
-        expect(bit_fields[0].initial_value).to eq "{8'h00}"
-        expect(bit_fields[1].initial_value).to eq "{8'h02, 8'h01}"
-        expect(bit_fields[2].initial_value).to eq "{8'h00}"
-        expect(bit_fields[3].initial_value).to eq "{8'h02, 8'h01}"
-        expect(bit_fields[4].initial_value).to eq "{8'h00}"
-        expect(bit_fields[5].initial_value).to eq "{8'h02, 8'h01}"
-        expect(bit_fields[6].initial_value).to eq "{8'h00}"
-        expect(bit_fields[7].initial_value).to eq "{8'h02, 8'h01}"
+        expect(bit_fields[0].initial_value).to eq "8'h00"
+        expect(bit_fields[1].initial_value).to eq "16'h0201"
+        expect(bit_fields[2].initial_value).to eq "8'h00"
+        expect(bit_fields[3].initial_value).to eq "16'h0201"
+        expect(bit_fields[4].initial_value).to eq "8'h00"
+        expect(bit_fields[5].initial_value).to eq "16'h0201"
+        expect(bit_fields[6].initial_value).to eq "8'h00"
+        expect(bit_fields[7].initial_value).to eq "16'h0201"
       end
     end
   end
@@ -434,7 +434,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, i)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, i)),
               .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
               .SW_WRITE_ONCE  (0)
             ) u_bit_field (
@@ -588,7 +588,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, j)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, j)),
               .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
               .SW_WRITE_ONCE  (0)
             ) u_bit_field (
@@ -742,7 +742,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice({2'h1, 2'h0}, 2, k)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, k)),
               .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
               .SW_WRITE_ONCE  (0)
             ) u_bit_field (
