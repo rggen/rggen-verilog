@@ -23,6 +23,7 @@ module RgGen
         'verilog/bit_field/type/rc_w0c_w1c_wc_woc',
         'verilog/bit_field/type/ro',
         'verilog/bit_field/type/rof',
+        'verilog/bit_field/type/rowo',
         'verilog/bit_field/type/rs_w0s_w1s_ws_wos',
         'verilog/bit_field/type/rw_w1_wo_wo1',
         'verilog/bit_field/type/rwc',
