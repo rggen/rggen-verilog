@@ -125,8 +125,8 @@ RSpec.describe 'register_file/verilog_top' do
               rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                .SW_WRITE_ONCE  (0)
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
               ) u_bit_field (
                 .i_clk              (i_clk),
                 .i_rst_n            (i_rst_n),
@@ -137,6 +137,8 @@ RSpec.describe 'register_file/verilog_top' do
                 .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                 .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                 .o_sw_value         (w_bit_field_value[0+:1]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
                 .i_hw_write_enable  (1'b0),
                 .i_hw_write_data    ({1{1'b0}}),
                 .i_hw_set           ({1{1'b0}}),
@@ -188,8 +190,8 @@ RSpec.describe 'register_file/verilog_top' do
               rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                .SW_WRITE_ONCE  (0)
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
               ) u_bit_field (
                 .i_clk              (i_clk),
                 .i_rst_n            (i_rst_n),
@@ -200,6 +202,8 @@ RSpec.describe 'register_file/verilog_top' do
                 .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                 .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                 .o_sw_value         (w_bit_field_value[0+:1]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
                 .i_hw_write_enable  (1'b0),
                 .i_hw_write_data    ({1{1'b0}}),
                 .i_hw_set           ({1{1'b0}}),
@@ -257,8 +261,8 @@ RSpec.describe 'register_file/verilog_top' do
                 rggen_bit_field #(
                   .WIDTH          (1),
                   .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                  .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                  .SW_WRITE_ONCE  (0)
+                  .SW_WRITE_ONCE  (0),
+                  .TRIGGER        (0)
                 ) u_bit_field (
                   .i_clk              (i_clk),
                   .i_rst_n            (i_rst_n),
@@ -269,6 +273,8 @@ RSpec.describe 'register_file/verilog_top' do
                   .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                   .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                   .o_sw_value         (w_bit_field_value[0+:1]),
+                  .o_write_trigger    (),
+                  .o_read_trigger     (),
                   .i_hw_write_enable  (1'b0),
                   .i_hw_write_data    ({1{1'b0}}),
                   .i_hw_set           ({1{1'b0}}),
@@ -321,8 +327,8 @@ RSpec.describe 'register_file/verilog_top' do
               rggen_bit_field #(
                 .WIDTH          (1),
                 .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                .SW_WRITE_ONCE  (0)
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
               ) u_bit_field (
                 .i_clk              (i_clk),
                 .i_rst_n            (i_rst_n),
@@ -333,6 +339,8 @@ RSpec.describe 'register_file/verilog_top' do
                 .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                 .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                 .o_sw_value         (w_bit_field_value[0+:1]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
                 .i_hw_write_enable  (1'b0),
                 .i_hw_write_data    ({1{1'b0}}),
                 .i_hw_set           ({1{1'b0}}),
@@ -398,8 +406,8 @@ RSpec.describe 'register_file/verilog_top' do
                         rggen_bit_field #(
                           .WIDTH          (1),
                           .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                          .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                          .SW_WRITE_ONCE  (0)
+                          .SW_WRITE_ONCE  (0),
+                          .TRIGGER        (0)
                         ) u_bit_field (
                           .i_clk              (i_clk),
                           .i_rst_n            (i_rst_n),
@@ -410,6 +418,8 @@ RSpec.describe 'register_file/verilog_top' do
                           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                           .o_sw_value         (w_bit_field_value[0+:1]),
+                          .o_write_trigger    (),
+                          .o_read_trigger     (),
                           .i_hw_write_enable  (1'b0),
                           .i_hw_write_data    ({1{1'b0}}),
                           .i_hw_set           ({1{1'b0}}),
@@ -468,8 +478,8 @@ RSpec.describe 'register_file/verilog_top' do
                       rggen_bit_field #(
                         .WIDTH          (1),
                         .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-                        .SW_READ_ACTION (`RGGEN_READ_DEFAULT),
-                        .SW_WRITE_ONCE  (0)
+                        .SW_WRITE_ONCE  (0),
+                        .TRIGGER        (0)
                       ) u_bit_field (
                         .i_clk              (i_clk),
                         .i_rst_n            (i_rst_n),
@@ -480,6 +490,8 @@ RSpec.describe 'register_file/verilog_top' do
                         .i_sw_write_data    (w_bit_field_write_data[0+:1]),
                         .o_sw_read_data     (w_bit_field_read_data[0+:1]),
                         .o_sw_value         (w_bit_field_value[0+:1]),
+                        .o_write_trigger    (),
+                        .o_read_trigger     (),
                         .i_hw_write_enable  (1'b0),
                         .i_hw_write_data    ({1{1'b0}}),
                         .i_hw_set           ({1{1'b0}}),

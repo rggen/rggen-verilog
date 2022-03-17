@@ -359,7 +359,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (1),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -370,6 +371,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
           .o_sw_value         (w_bit_field_value[0+:1]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({1{1'b0}}),
           .i_hw_set           ({1{1'b0}}),
@@ -385,7 +388,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (1),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -396,6 +400,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[1+:1]),
           .o_sw_read_data     (w_bit_field_read_data[1+:1]),
           .o_sw_value         (w_bit_field_value[1+:1]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({1{1'b0}}),
           .i_hw_set           ({1{1'b0}}),
@@ -411,7 +417,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (8),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -422,6 +429,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[8+:8]),
           .o_sw_read_data     (w_bit_field_read_data[8+:8]),
           .o_sw_value         (w_bit_field_value[8+:8]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({8{1'b0}}),
           .i_hw_set           ({8{1'b0}}),
@@ -437,7 +446,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (8),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -448,6 +458,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[16+:8]),
           .o_sw_read_data     (w_bit_field_read_data[16+:8]),
           .o_sw_value         (w_bit_field_value[16+:8]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({8{1'b0}}),
           .i_hw_set           ({8{1'b0}}),
@@ -463,7 +475,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (64),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -474,6 +487,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+:64]),
           .o_sw_read_data     (w_bit_field_read_data[0+:64]),
           .o_sw_value         (w_bit_field_value[0+:64]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({64{1'b0}}),
           .i_hw_set           ({64{1'b0}}),
@@ -489,7 +504,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -500,6 +516,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+16*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+16*i+:4]),
           .o_sw_value         (w_bit_field_value[0+16*i+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -515,7 +533,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -526,6 +545,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[4+16*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[4+16*i+:4]),
           .o_sw_value         (w_bit_field_value[4+16*i+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -541,7 +562,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -552,6 +574,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[8+16*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[8+16*i+:4]),
           .o_sw_value         (w_bit_field_value[8+16*i+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -567,7 +591,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -578,6 +603,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+16*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+16*j+:4]),
           .o_sw_value         (w_bit_field_value[0+16*j+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -593,7 +620,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -604,6 +632,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[4+16*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[4+16*j+:4]),
           .o_sw_value         (w_bit_field_value[4+16*j+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -619,7 +649,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -630,6 +661,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[8+16*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[8+16*j+:4]),
           .o_sw_value         (w_bit_field_value[8+16*j+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -645,7 +678,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -656,6 +690,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+16*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+16*k+:4]),
           .o_sw_value         (w_bit_field_value[0+16*k+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -671,7 +707,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -682,6 +719,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[4+16*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[4+16*k+:4]),
           .o_sw_value         (w_bit_field_value[4+16*k+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -697,7 +736,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -708,6 +748,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[8+16*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[8+16*k+:4]),
           .o_sw_value         (w_bit_field_value[8+16*k+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -723,7 +765,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -734,6 +777,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[0+16*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+16*m+:4]),
           .o_sw_value         (w_bit_field_value[0+16*m+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -749,7 +794,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -760,6 +806,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[4+16*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[4+16*m+:4]),
           .o_sw_value         (w_bit_field_value[4+16*m+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -775,7 +823,8 @@ RSpec.describe 'bit_field/type/ro' do
         rggen_bit_field #(
           .WIDTH              (4),
           .STORAGE            (0),
-          .EXTERNAL_READ_DATA (1)
+          .EXTERNAL_READ_DATA (1),
+          .TRIGGER            (0)
         ) u_bit_field (
           .i_clk              (1'b0),
           .i_rst_n            (1'b0),
@@ -786,6 +835,8 @@ RSpec.describe 'bit_field/type/ro' do
           .i_sw_write_data    (w_bit_field_write_data[8+16*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[8+16*m+:4]),
           .o_sw_value         (w_bit_field_value[8+16*m+:4]),
+          .o_write_trigger    (),
+          .o_read_trigger     (),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
