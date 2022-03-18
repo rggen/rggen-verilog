@@ -12,6 +12,8 @@ rggen_bit_field #(
   .i_sw_write_data    (<%= bit_field_write_data %>),
   .o_sw_read_data     (<%= bit_field_read_data %>),
   .o_sw_value         (<%= bit_field_value %>),
+  .o_write_trigger    (),
+  .o_read_trigger     (),
   .i_hw_write_enable  (1'b0),
   .i_hw_write_data    (<%= fill_0(width) %>),
   .i_hw_set           (<%= fill_0(width) %>),

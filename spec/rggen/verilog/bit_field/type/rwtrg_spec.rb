@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.describe 'bit_field/type/wrc' do
+RSpec.describe 'bit_field/type/rwtrg' do
   include_context 'clean-up builder'
   include_context 'verilog common'
 
   before(:all) do
-    RgGen.enable(:global, [:bus_width, :address_width, :array_port_format])
+    RgGen.enable(:global, [:bus_width, :address_width])
     RgGen.enable(:register_block, :byte_size)
     RgGen.enable(:register_file, [:name, :size, :offset_address])
     RgGen.enable(:register, [:name, :size, :type, :offset_address])
     RgGen.enable(:bit_field, [:name, :bit_assignment, :initial_value, :reference, :type])
-    RgGen.enable(:bit_field, :type, [:wrc])
+    RgGen.enable(:bit_field, :type, [:rwtrg])
     RgGen.enable(:register_block, :verilog_top)
     RgGen.enable(:register_file, :verilog_top)
     RgGen.enable(:register, :verilog_top)
@@ -21,36 +21,36 @@ RSpec.describe 'bit_field/type/wrc' do
     create_verilog(&body).bit_fields
   end
 
-  it '出力ポート#value_outを持つ' do
+  it '出力ポート#value_out/#write_trigger/#raed_triggerを持つ' do
     bit_fields = create_bit_fields do
       byte_size 256
 
       register do
         name 'register_0'
-        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :wrc; initial_value 0 }
+        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :rwtrg; initial_value 0 }
       end
 
       register do
         name 'register_1'
-        bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 64; type :wrc; initial_value 0 }
+        bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 64; type :rwtrg; initial_value 0 }
       end
 
       register do
         name 'register_2'
         size [4]
-        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :wrc; initial_value 0 }
+        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :rwtrg; initial_value 0 }
       end
 
       register do
         name 'register_3'
         size [2, 2]
-        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :wrc; initial_value 0 }
-        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :wrc; initial_value 0 }
+        bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rwtrg; initial_value 0 }
+        bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :rwtrg; initial_value 0 }
       end
 
       register_file do
@@ -61,9 +61,9 @@ RSpec.describe 'bit_field/type/wrc' do
           register do
             name 'register_0'
             size [2, 2]
-            bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :wrc; initial_value 0 }
-            bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :wrc; initial_value 0 }
-            bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :wrc; initial_value 0 }
+            bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :rwtrg; initial_value 0 }
+            bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rwtrg; initial_value 0 }
+            bit_field { name 'bit_field_2'; bit_assignment lsb: 16, width: 4, sequence_size: 2, step: 8; type :rwtrg; initial_value 0 }
           end
         end
       end
@@ -73,57 +73,169 @@ RSpec.describe 'bit_field/type/wrc' do
       :register_block, :value_out,
       name: 'o_register_0_bit_field_0', direction: :output, width: 1
     )
+    expect(bit_fields[0]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_0_bit_field_0_write_trigger', direction: :output, width: 1
+    )
+    expect(bit_fields[0]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_0_bit_field_0_read_trigger', direction: :output, width: 1
+    )
+
     expect(bit_fields[1]).to have_port(
       :register_block, :value_out,
       name: 'o_register_0_bit_field_1', direction: :output, width: 2
     )
+    expect(bit_fields[1]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_0_bit_field_1_write_trigger', direction: :output, width: 1
+    )
+    expect(bit_fields[1]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_0_bit_field_1_read_trigger', direction: :output, width: 1
+    )
+
     expect(bit_fields[2]).to have_port(
       :register_block, :value_out,
       name: 'o_register_0_bit_field_2', direction: :output, width: 4, array_size: [2]
+    )
+    expect(bit_fields[2]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_0_bit_field_2_write_trigger', direction: :output, width: 1, array_size: [2]
+    )
+    expect(bit_fields[2]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_0_bit_field_2_read_trigger', direction: :output, width: 1, array_size: [2]
     )
 
     expect(bit_fields[3]).to have_port(
       :register_block, :value_out,
       name: 'o_register_1_bit_field_0', direction: :output, width: 64
     )
+    expect(bit_fields[3]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_1_bit_field_0_write_trigger', direction: :output, width: 1
+    )
+    expect(bit_fields[3]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_1_bit_field_0_read_trigger', direction: :output, width: 1
+    )
 
     expect(bit_fields[4]).to have_port(
       :register_block, :value_out,
       name: 'o_register_2_bit_field_0', direction: :output, width: 1, array_size: [4]
     )
+    expect(bit_fields[4]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_2_bit_field_0_write_trigger', direction: :output, width: 1, array_size: [4]
+    )
+    expect(bit_fields[4]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_2_bit_field_0_read_trigger', direction: :output, width: 1, array_size: [4]
+    )
+
     expect(bit_fields[5]).to have_port(
       :register_block, :value_out,
       name: 'o_register_2_bit_field_1', direction: :output, width: 2, array_size: [4]
     )
+    expect(bit_fields[5]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_2_bit_field_1_write_trigger', direction: :output, width: 1, array_size: [4]
+    )
+    expect(bit_fields[5]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_2_bit_field_1_read_trigger', direction: :output, width: 1, array_size: [4]
+    )
+
     expect(bit_fields[6]).to have_port(
       :register_block, :value_out,
       name: 'o_register_2_bit_field_2', direction: :output, width: 4, array_size: [4, 2]
+    )
+    expect(bit_fields[6]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_2_bit_field_2_write_trigger', direction: :output, width: 1, array_size: [4, 2]
+    )
+    expect(bit_fields[6]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_2_bit_field_2_read_trigger', direction: :output, width: 1, array_size: [4, 2]
     )
 
     expect(bit_fields[7]).to have_port(
       :register_block, :value_out,
       name: 'o_register_3_bit_field_0', direction: :output, width: 1, array_size: [2, 2]
     )
+    expect(bit_fields[7]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_3_bit_field_0_write_trigger', direction: :output, width: 1, array_size: [2, 2]
+    )
+    expect(bit_fields[7]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_3_bit_field_0_read_trigger', direction: :output, width: 1, array_size: [2, 2]
+    )
+
     expect(bit_fields[8]).to have_port(
       :register_block, :value_out,
       name: 'o_register_3_bit_field_1', direction: :output, width: 2, array_size: [2, 2]
     )
+    expect(bit_fields[8]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_3_bit_field_1_write_trigger', direction: :output, width: 1, array_size: [2, 2]
+    )
+    expect(bit_fields[8]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_3_bit_field_1_read_trigger', direction: :output, width: 1, array_size: [2, 2]
+    )
+
     expect(bit_fields[9]).to have_port(
       :register_block, :value_out,
       name: 'o_register_3_bit_field_2', direction: :output, width: 4, array_size: [2, 2, 2]
+    )
+    expect(bit_fields[9]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_3_bit_field_2_write_trigger', direction: :output, width: 1, array_size: [2, 2, 2]
+    )
+    expect(bit_fields[9]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_3_bit_field_2_read_trigger', direction: :output, width: 1, array_size: [2, 2, 2]
     )
 
     expect(bit_fields[10]).to have_port(
       :register_block, :value_out,
       name: 'o_register_file_4_register_file_0_register_0_bit_field_0', direction: :output, width: 1, array_size: [2, 2, 2, 2]
     )
+    expect(bit_fields[10]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_0_write_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2]
+    )
+    expect(bit_fields[10]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_0_read_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2]
+    )
+
     expect(bit_fields[11]).to have_port(
       :register_block, :value_out,
       name: 'o_register_file_4_register_file_0_register_0_bit_field_1', direction: :output, width: 2, array_size: [2, 2, 2, 2]
     )
+    expect(bit_fields[11]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_1_write_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2]
+    )
+    expect(bit_fields[11]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_1_read_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2]
+    )
+
     expect(bit_fields[12]).to have_port(
       :register_block, :value_out,
       name: 'o_register_file_4_register_file_0_register_0_bit_field_2', direction: :output, width: 4, array_size: [2, 2, 2, 2, 2]
+    )
+    expect(bit_fields[12]).to have_port(
+      :register_block, :write_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_2_write_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2, 2]
+    )
+    expect(bit_fields[12]).to have_port(
+      :register_block, :read_trigger,
+      name: 'o_register_file_4_register_file_0_register_0_bit_field_2_read_trigger', direction: :output, width: 1, array_size: [2, 2, 2, 2, 2]
     )
   end
 
@@ -134,30 +246,30 @@ RSpec.describe 'bit_field/type/wrc' do
 
         register do
           name 'register_0'
-          bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :wrc; initial_value 0 }
-          bit_field { name 'bit_field_1'; bit_assignment lsb: 16, width: 16; type :wrc; initial_value 0xabcd }
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0; type :rwtrg; initial_value 0 }
+          bit_field { name 'bit_field_1'; bit_assignment lsb: 16, width: 16; type :rwtrg; initial_value 0xabcd }
         end
 
         register do
           name 'register_1'
-          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 64; type :wrc; initial_value 0 }
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 64; type :rwtrg; initial_value 0 }
         end
 
         register do
           name 'register_2'
-          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :wrc; initial_value 0 }
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :rwtrg; initial_value 0 }
         end
 
         register do
           name 'register_3'
           size [4]
-          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :wrc; initial_value 0 }
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :rwtrg; initial_value 0 }
         end
 
         register do
           name 'register_4'
           size [2, 2]
-          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :wrc; initial_value 0 }
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :rwtrg; initial_value 0 }
         end
 
         register_file do
@@ -168,7 +280,7 @@ RSpec.describe 'bit_field/type/wrc' do
             register do
               name 'register_0'
               size [2, 2]
-              bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :wrc; initial_value 0 }
+              bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 4, sequence_size: 4, step: 8; type :rwtrg; initial_value 0 }
             end
           end
         end
@@ -178,7 +290,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (1),
           .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -189,8 +302,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
           .o_sw_value         (w_bit_field_value[0+:1]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_0_bit_field_0_write_trigger),
+          .o_read_trigger     (o_register_0_bit_field_0_read_trigger),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({1{1'b0}}),
           .i_hw_set           ({1{1'b0}}),
@@ -206,7 +319,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (16),
           .INITIAL_VALUE  (`rggen_slice(16'habcd, 16, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -217,8 +331,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[16+:16]),
           .o_sw_read_data     (w_bit_field_read_data[16+:16]),
           .o_sw_value         (w_bit_field_value[16+:16]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_0_bit_field_1_write_trigger),
+          .o_read_trigger     (o_register_0_bit_field_1_read_trigger),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({16{1'b0}}),
           .i_hw_set           ({16{1'b0}}),
@@ -234,7 +348,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (64),
           .INITIAL_VALUE  (`rggen_slice(64'h0000000000000000, 64, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -245,8 +360,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+:64]),
           .o_sw_read_data     (w_bit_field_read_data[0+:64]),
           .o_sw_value         (w_bit_field_value[0+:64]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_1_bit_field_0_write_trigger),
+          .o_read_trigger     (o_register_1_bit_field_0_read_trigger),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({64{1'b0}}),
           .i_hw_set           ({64{1'b0}}),
@@ -262,7 +377,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -273,8 +389,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+8*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*i+:4]),
           .o_sw_value         (w_bit_field_value[0+8*i+:4]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_2_bit_field_0_write_trigger[1*(i)+:1]),
+          .o_read_trigger     (o_register_2_bit_field_0_read_trigger[1*(i)+:1]),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -290,7 +406,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -301,8 +418,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+8*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*j+:4]),
           .o_sw_value         (w_bit_field_value[0+8*j+:4]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_3_bit_field_0_write_trigger[1*(4*i+j)+:1]),
+          .o_read_trigger     (o_register_3_bit_field_0_read_trigger[1*(4*i+j)+:1]),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -318,7 +435,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -329,8 +447,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+8*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*k+:4]),
           .o_sw_value         (w_bit_field_value[0+8*k+:4]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_4_bit_field_0_write_trigger[1*(8*i+4*j+k)+:1]),
+          .o_read_trigger     (o_register_4_bit_field_0_read_trigger[1*(8*i+4*j+k)+:1]),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
@@ -346,7 +464,8 @@ RSpec.describe 'bit_field/type/wrc' do
         rggen_bit_field #(
           .WIDTH          (4),
           .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
-          .SW_READ_ACTION (`RGGEN_READ_CLEAR)
+          .SW_WRITE_ONCE  (0),
+          .TRIGGER        (1)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
@@ -357,8 +476,8 @@ RSpec.describe 'bit_field/type/wrc' do
           .i_sw_write_data    (w_bit_field_write_data[0+8*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*m+:4]),
           .o_sw_value         (w_bit_field_value[0+8*m+:4]),
-          .o_write_trigger    (),
-          .o_read_trigger     (),
+          .o_write_trigger    (o_register_file_5_register_file_0_register_0_bit_field_0_write_trigger[1*(32*i+16*j+8*k+4*l+m)+:1]),
+          .o_read_trigger     (o_register_file_5_register_file_0_register_0_bit_field_0_read_trigger[1*(32*i+16*j+8*k+4*l+m)+:1]),
           .i_hw_write_enable  (1'b0),
           .i_hw_write_data    ({4{1'b0}}),
           .i_hw_set           ({4{1'b0}}),
