@@ -468,8 +468,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
           .i_sw_write_enable  (1'b0),
@@ -497,8 +497,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[1+:1]),
           .i_sw_write_enable  (1'b0),
@@ -526,8 +526,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[8+:8]),
           .i_sw_write_enable  (1'b0),
@@ -555,8 +555,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[16+:8]),
           .i_sw_write_enable  (1'b0),
@@ -584,8 +584,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+:64]),
           .i_sw_write_enable  (1'b0),
@@ -613,8 +613,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+16*i+:4]),
           .i_sw_write_enable  (1'b0),
@@ -642,8 +642,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[4+16*i+:4]),
           .i_sw_write_enable  (1'b0),
@@ -671,8 +671,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[8+16*i+:4]),
           .i_sw_write_enable  (1'b0),
@@ -700,8 +700,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+16*j+:4]),
           .i_sw_write_enable  (1'b0),
@@ -729,8 +729,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[4+16*j+:4]),
           .i_sw_write_enable  (1'b0),
@@ -758,8 +758,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[8+16*j+:4]),
           .i_sw_write_enable  (1'b0),
@@ -787,8 +787,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+16*k+:4]),
           .i_sw_write_enable  (1'b0),
@@ -816,8 +816,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[4+16*k+:4]),
           .i_sw_write_enable  (1'b0),
@@ -845,8 +845,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[8+16*k+:4]),
           .i_sw_write_enable  (1'b0),
@@ -874,8 +874,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[0+16*m+:4]),
           .i_sw_write_enable  (1'b0),
@@ -903,8 +903,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[4+16*m+:4]),
           .i_sw_write_enable  (1'b0),
@@ -932,8 +932,8 @@ RSpec.describe 'bit_field/type/rotrg' do
           .EXTERNAL_READ_DATA (1),
           .TRIGGER            (1)
         ) u_bit_field (
-          .i_clk              (1'b0),
-          .i_rst_n            (1'b0),
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
           .i_sw_valid         (w_bit_field_valid),
           .i_sw_read_mask     (w_bit_field_read_mask[8+16*m+:4]),
           .i_sw_write_enable  (1'b0),
