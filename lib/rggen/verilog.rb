@@ -42,6 +42,7 @@ module RgGen
         'verilog/register_block/protocol',
         'verilog/register_block/protocol/apb',
         'verilog/register_block/protocol/axi4lite',
+        'verilog/register_block/protocol/wishbone',
         'verilog/register_block/verilog_top',
         'verilog/register_file/verilog_top'
       ]
