@@ -92,6 +92,7 @@ RSpec.describe 'register_file/verilog_top' do
             wire [31:0] w_bit_field_write_data;
             wire [31:0] w_bit_field_read_data;
             wire [31:0] w_bit_field_value;
+            `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
             rggen_default_register #(
               .READABLE       (1),
               .WRITABLE       (1),
@@ -99,7 +100,6 @@ RSpec.describe 'register_file/verilog_top' do
               .OFFSET_ADDRESS (8'h00),
               .BUS_WIDTH      (32),
               .DATA_WIDTH     (32),
-              .VALID_BITS     (32'h00000001),
               .REGISTER_INDEX (0)
             ) u_register (
               .i_clk                  (i_clk),
@@ -157,6 +157,7 @@ RSpec.describe 'register_file/verilog_top' do
             wire [31:0] w_bit_field_write_data;
             wire [31:0] w_bit_field_read_data;
             wire [31:0] w_bit_field_value;
+            `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
             rggen_default_register #(
               .READABLE       (1),
               .WRITABLE       (1),
@@ -164,7 +165,6 @@ RSpec.describe 'register_file/verilog_top' do
               .OFFSET_ADDRESS (8'h04),
               .BUS_WIDTH      (32),
               .DATA_WIDTH     (32),
-              .VALID_BITS     (32'h00000001),
               .REGISTER_INDEX (0)
             ) u_register (
               .i_clk                  (i_clk),
@@ -228,6 +228,7 @@ RSpec.describe 'register_file/verilog_top' do
               wire [31:0] w_bit_field_write_data;
               wire [31:0] w_bit_field_read_data;
               wire [31:0] w_bit_field_value;
+              `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
               rggen_default_register #(
                 .READABLE       (1),
                 .WRITABLE       (1),
@@ -235,7 +236,6 @@ RSpec.describe 'register_file/verilog_top' do
                 .OFFSET_ADDRESS (8'h10),
                 .BUS_WIDTH      (32),
                 .DATA_WIDTH     (32),
-                .VALID_BITS     (32'h00000001),
                 .REGISTER_INDEX (0)
               ) u_register (
                 .i_clk                  (i_clk),
@@ -294,6 +294,7 @@ RSpec.describe 'register_file/verilog_top' do
             wire [31:0] w_bit_field_write_data;
             wire [31:0] w_bit_field_read_data;
             wire [31:0] w_bit_field_value;
+            `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
             rggen_default_register #(
               .READABLE       (1),
               .WRITABLE       (1),
@@ -301,7 +302,6 @@ RSpec.describe 'register_file/verilog_top' do
               .OFFSET_ADDRESS (8'h14),
               .BUS_WIDTH      (32),
               .DATA_WIDTH     (32),
-              .VALID_BITS     (32'h00000001),
               .REGISTER_INDEX (0)
             ) u_register (
               .i_clk                  (i_clk),
@@ -373,6 +373,7 @@ RSpec.describe 'register_file/verilog_top' do
                       wire [31:0] w_bit_field_write_data;
                       wire [31:0] w_bit_field_read_data;
                       wire [31:0] w_bit_field_value;
+                      `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
                       rggen_default_register #(
                         .READABLE       (1),
                         .WRITABLE       (1),
@@ -380,7 +381,6 @@ RSpec.describe 'register_file/verilog_top' do
                         .OFFSET_ADDRESS (8'h20+32*(2*i+j)),
                         .BUS_WIDTH      (32),
                         .DATA_WIDTH     (32),
-                        .VALID_BITS     (32'h00000001),
                         .REGISTER_INDEX (2*k+l)
                       ) u_register (
                         .i_clk                  (i_clk),
@@ -445,6 +445,7 @@ RSpec.describe 'register_file/verilog_top' do
                     wire [31:0] w_bit_field_write_data;
                     wire [31:0] w_bit_field_read_data;
                     wire [31:0] w_bit_field_value;
+                    `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
                     rggen_default_register #(
                       .READABLE       (1),
                       .WRITABLE       (1),
@@ -452,7 +453,6 @@ RSpec.describe 'register_file/verilog_top' do
                       .OFFSET_ADDRESS (8'h20+32*(2*i+j)+8'h10),
                       .BUS_WIDTH      (32),
                       .DATA_WIDTH     (32),
-                      .VALID_BITS     (32'h00000001),
                       .REGISTER_INDEX (2*k+l)
                     ) u_register (
                       .i_clk                  (i_clk),
