@@ -5,10 +5,7 @@ RSpec.describe 'register_block/verilog_top' do
   include_context 'clean-up builder'
 
   before(:all) do
-    load_setup_files(RgGen.builder, [
-      File.join(RGGEN_ROOT, 'rggen-default-register-map/lib/rggen/default_register_map/setup.rb'),
-      File.join(RGGEN_VERILOG_ROOT, 'lib/rggen/verilog/setup.rb')
-    ])
+    RgGen.enable_all
   end
 
   def create_register_block(&body)
