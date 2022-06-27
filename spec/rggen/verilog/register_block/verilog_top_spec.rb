@@ -9,10 +9,13 @@ RSpec.describe 'register_block/verilog_top' do
   end
 
   def create_register_block(&body)
-    create_verilog(&body).register_blocks.first
+    configuration = create_configuration(
+      bus_width: 32, enable_wide_register: true
+    )
+    create_verilog(configuration, &body).register_blocks.first
   end
 
-  let(:bus_width) { default_configuration.bus_width }
+  let(:bus_width) { 32 }
 
   let(:address_width) { 8 }
 

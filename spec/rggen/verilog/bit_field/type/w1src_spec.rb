@@ -2,23 +2,10 @@
 
 RSpec.describe 'bit_field/type/w1src' do
   include_context 'clean-up builder'
-  include_context 'verilog common'
+  include_context 'bit field verilog common'
 
   before(:all) do
-    RgGen.enable(:global, [:bus_width, :address_width, :array_port_format])
-    RgGen.enable(:register_block, :byte_size)
-    RgGen.enable(:register_file, [:name, :size, :offset_address])
-    RgGen.enable(:register, [:name, :size, :type, :offset_address])
-    RgGen.enable(:bit_field, [:name, :bit_assignment, :initial_value, :reference, :type])
     RgGen.enable(:bit_field, :type, [:w1src])
-    RgGen.enable(:register_block, :verilog_top)
-    RgGen.enable(:register_file, :verilog_top)
-    RgGen.enable(:register, :verilog_top)
-    RgGen.enable(:bit_field, :verilog_top)
-  end
-
-  def create_bit_fields(&body)
-    create_verilog(&body).bit_fields
   end
 
   it '出力ポート#value_outを持つ' do

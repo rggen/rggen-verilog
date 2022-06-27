@@ -94,3 +94,24 @@ RSpec.shared_context 'verilog common' do
     @verilog_facotry ||= []
   end
 end
+
+RSpec.shared_context 'bit field verilog common' do
+  include_context 'verilog common'
+
+  before(:all) do
+    RgGen.enable(:global, [:bus_width, :address_width, :enable_wide_register])
+    RgGen.enable(:register_block, :byte_size)
+    RgGen.enable(:register_file, [:name, :size, :offset_address])
+    RgGen.enable(:register, [:name, :size, :type, :offset_address])
+    RgGen.enable(:bit_field, [:name, :bit_assignment, :initial_value, :reference, :type])
+    RgGen.enable(:register_block, :verilog_top)
+    RgGen.enable(:register_file, :verilog_top)
+    RgGen.enable(:register, :verilog_top)
+    RgGen.enable(:bit_field, :verilog_top)
+  end
+
+  def create_bit_fields(&body)
+    configuration = create_configuration(enable_wide_register: true)
+    create_verilog(configuration, &body).bit_fields
+  end
+end
