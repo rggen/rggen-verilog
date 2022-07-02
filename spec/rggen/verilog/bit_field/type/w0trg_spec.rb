@@ -113,15 +113,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (1)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[0+:1]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[0+:1]),
-          .i_bit_field_write_data (w_bit_field_write_data[0+:1]),
-          .o_bit_field_read_data  (w_bit_field_read_data[0+:1]),
-          .o_bit_field_value      (w_bit_field_value[0+:1]),
-          .o_trigger              (o_register_0_bit_field_0_trigger)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+          .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+          .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+          .o_sw_value         (w_bit_field_value[0+:1]),
+          .i_value            ({1{1'b0}}),
+          .o_trigger          (o_register_0_bit_field_0_trigger)
         );
       CODE
 
@@ -130,15 +132,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (4)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[8+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[8+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[8+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[8+:4]),
-          .o_bit_field_value      (w_bit_field_value[8+:4]),
-          .o_trigger              (o_register_0_bit_field_1_trigger)
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[8+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[8+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[8+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[8+:4]),
+          .o_sw_value         (w_bit_field_value[8+:4]),
+          .i_value            ({4{1'b0}}),
+          .o_trigger          (o_register_0_bit_field_1_trigger)
         );
       CODE
 
@@ -147,15 +151,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (4)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*i+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*i+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*i+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*i+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*i+:4]),
-          .o_trigger              (o_register_0_bit_field_2_trigger[4*(i)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*i+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*i+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*i+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*i+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*i+:4]),
+          .i_value            ({4{1'b0}}),
+          .o_trigger          (o_register_0_bit_field_2_trigger[4*(i)+:4])
         );
       CODE
 
@@ -164,15 +170,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (4)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*j+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*j+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*j+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*j+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*j+:4]),
-          .o_trigger              (o_register_1_bit_field_2_trigger[4*(2*i+j)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*j+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*j+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*j+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*j+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*j+:4]),
+          .i_value            ({4{1'b0}}),
+          .o_trigger          (o_register_1_bit_field_2_trigger[4*(2*i+j)+:4])
         );
       CODE
 
@@ -181,15 +189,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (4)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*k+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*k+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*k+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*k+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*k+:4]),
-          .o_trigger              (o_register_2_bit_field_2_trigger[4*(4*i+2*j+k)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*k+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*k+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*k+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*k+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*k+:4]),
+          .i_value            ({4{1'b0}}),
+          .o_trigger          (o_register_2_bit_field_2_trigger[4*(4*i+2*j+k)+:4])
         );
       CODE
 
@@ -198,15 +208,17 @@ RSpec.describe 'bit_field/type/w0trg' do
           .TRIGGER_VALUE  (1'b0),
           .WIDTH          (4)
         ) u_bit_field (
-          .i_clk                  (i_clk),
-          .i_rst_n                (i_rst_n),
-          .i_bit_field_valid      (w_bit_field_valid),
-          .i_bit_field_read_mask  (w_bit_field_read_mask[16+8*m+:4]),
-          .i_bit_field_write_mask (w_bit_field_write_mask[16+8*m+:4]),
-          .i_bit_field_write_data (w_bit_field_write_data[16+8*m+:4]),
-          .o_bit_field_read_data  (w_bit_field_read_data[16+8*m+:4]),
-          .o_bit_field_value      (w_bit_field_value[16+8*m+:4]),
-          .o_trigger              (o_register_file_3_register_file_0_register_0_bit_field_2_trigger[4*(16*i+8*j+4*k+2*l+m)+:4])
+          .i_clk              (i_clk),
+          .i_rst_n            (i_rst_n),
+          .i_sw_valid         (w_bit_field_valid),
+          .i_sw_read_mask     (w_bit_field_read_mask[16+8*m+:4]),
+          .i_sw_write_enable  (1'b1),
+          .i_sw_write_mask    (w_bit_field_write_mask[16+8*m+:4]),
+          .i_sw_write_data    (w_bit_field_write_data[16+8*m+:4]),
+          .o_sw_read_data     (w_bit_field_read_data[16+8*m+:4]),
+          .o_sw_value         (w_bit_field_value[16+8*m+:4]),
+          .i_value            ({4{1'b0}}),
+          .o_trigger          (o_register_file_3_register_file_0_register_0_bit_field_2_trigger[4*(16*i+8*j+4*k+2*l+m)+:4])
         );
       CODE
     end
