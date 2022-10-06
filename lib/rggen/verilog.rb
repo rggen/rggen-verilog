@@ -31,6 +31,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/register/type/indirect',
     'verilog/bit_field/verilog_top',
     'verilog/bit_field/type',
+    'verilog/bit_field/type/custom',
     'verilog/bit_field/type/rc_w0c_w1c_wc_woc',
     'verilog/bit_field/type/ro_rotrg',
     'verilog/bit_field/type/rof',
