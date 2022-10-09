@@ -35,6 +35,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/bit_field/type/rc_w0c_w1c_wc_woc',
     'verilog/bit_field/type/ro_rotrg',
     'verilog/bit_field/type/rof',
+    'verilog/bit_field/type/rol',
     'verilog/bit_field/type/row0trg_row1trg',
     'verilog/bit_field/type/rowo_rowotrg',
     'verilog/bit_field/type/rs_w0s_w1s_ws_wos',
