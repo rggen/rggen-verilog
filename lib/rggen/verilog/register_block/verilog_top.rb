@@ -90,7 +90,7 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
     def ports
       register_block
         .declarations[:port]
-        .yield_self(&method(:sort_port_declarations))
+        .then(&method(:sort_port_declarations))
     end
 
     def sort_port_declarations(declarations)
