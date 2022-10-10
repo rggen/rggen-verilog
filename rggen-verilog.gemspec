@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.6'
 
-  spec.add_runtime_dependency 'rggen-systemverilog', '>= 0.27.0'
+  spec.add_runtime_dependency 'rggen-systemverilog', '>= 0.28.0'
   spec.add_development_dependency 'bundler'
 end
