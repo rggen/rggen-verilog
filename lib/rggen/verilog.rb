@@ -6,16 +6,18 @@ require_relative 'verilog/utility/local_scope'
 require_relative 'verilog/utility'
 require_relative 'verilog/rtl/component'
 require_relative 'verilog/rtl/feature'
-require_relative 'verilog/rtl/factories'
+require_relative 'verilog/rtl_header/component'
+require_relative 'verilog/rtl_header/feature'
+require_relative 'verilog/factories'
 
 RgGen.setup_plugin :'rggen-verilog' do |plugin|
   plugin.version RgGen::Verilog::VERSION
 
   plugin.register_component :verilog_rtl do
     component RgGen::Verilog::RTL::Component,
-              RgGen::Verilog::RTL::ComponentFactory
+              RgGen::Verilog::ComponentFactory
     feature RgGen::Verilog::RTL::Feature,
-            RgGen::Verilog::RTL::FeatureFactory
+            RgGen::Verilog::FeatureFactory
   end
 
   plugin.files [
@@ -48,5 +50,16 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/rtl/bit_field/type/w0trg_w1trg',
     'verilog/rtl/bit_field/type/wo_wo1_wotrg',
     'verilog/rtl/bit_field/type/wrc_wrs'
+  ]
+
+  plugin.register_component :verilog_rtl_header do
+    component RgGen::Verilog::RTLHeader::Component,
+              RgGen::Verilog::ComponentFactory
+    feature RgGen::Verilog::RTLHeader::Feature,
+            RgGen::Verilog::FeatureFactory
+  end
+
+  plugin.files [
+    'verilog/rtl_header/bit_field/verilog_rtl_header'
   ]
 end
