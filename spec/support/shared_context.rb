@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-RSpec.shared_context 'verilog common' do
+RSpec.shared_context 'verilog rtl common' do
   include_context 'configuration common'
   include_context 'register map common'
 
-  def build_verilog_factory(builder)
-    builder.build_factory(:output, :verilog)
+  def build_verilog_rtl_factory(builder)
+    builder.build_factory(:output, :verilog_rtl)
   end
 
-  def create_verilog(configuration = nil, &data_block)
+  def create_verilog_rtl(configuration = nil, &data_block)
     register_map = create_register_map(configuration) do
       register_block(&data_block)
     end
-    @verilog_facotry[0] ||= build_verilog_factory(RgGen.builder)
-    @verilog_facotry[0].create(configuration || default_configuration, register_map)
+    @verilog_rtl_facotry[0] ||= build_verilog_rtl_factory(RgGen.builder)
+    @verilog_rtl_facotry[0].create(configuration || default_configuration, register_map)
   end
 
-  def delete_verilog_factory
-    @verilog_facotry.clear
+  def delete_verilog_rtl_factory
+    @verilog_rtl_facotry.clear
   end
 
   def have_port(*args, &body)
@@ -91,12 +91,12 @@ RSpec.shared_context 'verilog common' do
   end
 
   before(:all) do
-    @verilog_facotry ||= []
+    @verilog_rtl_facotry ||= []
   end
 end
 
 RSpec.shared_context 'bit field verilog common' do
-  include_context 'verilog common'
+  include_context 'verilog rtl common'
 
   before(:all) do
     RgGen.enable(:global, [:bus_width, :address_width, :enable_wide_register])
@@ -112,6 +112,6 @@ RSpec.shared_context 'bit field verilog common' do
 
   def create_bit_fields(&body)
     configuration = create_configuration(enable_wide_register: true)
-    create_verilog(configuration, &body).bit_fields
+    create_verilog_rtl(configuration, &body).bit_fields
   end
 end
