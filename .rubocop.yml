@@ -20,7 +20,8 @@ Metrics/BlockLength:
     - define_simple_feature
     - factory
     - setup_plugin
-    - verilog
+    - verilog_rtl
+    - verilog_rtl_header
 
 Naming/VariableNumber:
   AllowedIdentifiers:

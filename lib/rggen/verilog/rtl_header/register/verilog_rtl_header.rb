@@ -59,4 +59,4 @@ RgGen.define_simple_feature(:register, :verilog_rtl_header) do
         .map { |list| list.join('_') }
     end
   end
- end
+end
