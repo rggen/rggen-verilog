@@ -61,6 +61,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
 
   plugin.files [
     'verilog/rtl_header/bit_field/verilog_rtl_header',
-    'verilog/rtl_header/register/verilog_rtl_header'
+    'verilog/rtl_header/register/verilog_rtl_header',
+    'verilog/rtl_header/register_block/verilog_rtl_header'
   ]
 end

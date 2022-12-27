@@ -119,14 +119,14 @@ end
 RSpec.shared_context 'verilog rtl header common' do
   include_context 'verilog rtl common'
 
-  def build_verilog_header_factory(builder)
+  def build_verilog_rtl_header_factory(builder)
     builder.build_factory(:output, :verilog_rtl_header)
   end
 
   def create_verilog_rtl_header(configuration = nil, &data_block)
     configuration = default_configuration if configuration.nil?
     register_map = create_register_map(configuration) { register_block(&data_block) }
-    @verilog_rtl_header_factory[0] ||= build_verilog_header_factory(RgGen.builder)
+    @verilog_rtl_header_factory[0] ||= build_verilog_rtl_header_factory(RgGen.builder)
     @verilog_rtl_header_factory[0].create(configuration, register_map)
   end
 
