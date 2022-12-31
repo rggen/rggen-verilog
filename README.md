@@ -68,7 +68,7 @@ Feedbacks, bus reports, questions and etc. are welcome! You can post them bu usi
 
 ## Copyright & License
 
-Copyright &copy; 2020-2022 Taichi Ishitani. RgGen::Verilog is licensed under the [MIT License](https://opensource.org/licenses/MIT), see [LICENSE](LICENSE) for futher details.
+Copyright &copy; 2020-2023 Taichi Ishitani. RgGen::Verilog is licensed under the [MIT License](https://opensource.org/licenses/MIT), see [LICENSE](LICENSE) for futher details.
 
 ## Code of Conduct
 
