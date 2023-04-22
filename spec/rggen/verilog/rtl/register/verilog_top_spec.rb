@@ -176,8 +176,7 @@ RSpec.describe 'register/verilog_top' do
         register do
           name 'register_3'
           offset_address 0x30
-          type [:indirect, 'register_0.bit_field_0', 'register_0.bit_field_1']
-          size [2, 2]
+          size [2, step: 8]
           bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 2; type :rw; initial_value 0 }
           bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rw; initial_value 0 }
         end
@@ -185,12 +184,21 @@ RSpec.describe 'register/verilog_top' do
         register do
           name 'register_4'
           offset_address 0x40
+          type [:indirect, 'register_0.bit_field_0', 'register_0.bit_field_1']
+          size [2, 2]
+          bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 2; type :rw; initial_value 0 }
+          bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 2; type :rw; initial_value 0 }
+        end
+
+        register do
+          name 'register_5'
+          offset_address 0x50
           bit_field { bit_assignment lsb: 0, width: 2; type :rw; initial_value 0 }
         end
 
         register_file do
-          name 'register_file_5'
-          offset_address 0x50
+          name 'register_file_6'
+          offset_address 0x60
           size [2, 2]
           register_file do
             name 'register_file_0'
@@ -199,6 +207,22 @@ RSpec.describe 'register/verilog_top' do
               name 'register_0'
               offset_address 0x00
               size [2, 2]
+              bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 2; type :rw; initial_value 0 }
+            end
+          end
+        end
+
+        register_file do
+          name 'register_file_7'
+          offset_address 0xa0
+          size [2, step: 32]
+          register_file do
+            name 'register_file_0'
+            offset_address 0x00
+            register do
+              name 'register_0'
+              offset_address 0x00
+              size [2, step: 8]
               bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 2; type :rw; initial_value 0 }
             end
           end
@@ -220,8 +244,7 @@ RSpec.describe 'register/verilog_top' do
             .ADDRESS_WIDTH  (8),
             .OFFSET_ADDRESS (8'h00),
             .BUS_WIDTH      (32),
-            .DATA_WIDTH     (32),
-            .REGISTER_INDEX (0)
+            .DATA_WIDTH     (32)
           ) u_register (
             .i_clk                  (i_clk),
             .i_rst_n                (i_rst_n),
@@ -348,10 +371,9 @@ RSpec.describe 'register/verilog_top' do
               .READABLE       (1),
               .WRITABLE       (1),
               .ADDRESS_WIDTH  (8),
-              .OFFSET_ADDRESS (8'h20),
+              .OFFSET_ADDRESS (8'h20+4*i),
               .BUS_WIDTH      (32),
-              .DATA_WIDTH     (32),
-              .REGISTER_INDEX (i)
+              .DATA_WIDTH     (32)
             ) u_register (
               .i_clk                  (i_clk),
               .i_rst_n                (i_rst_n),
@@ -435,6 +457,104 @@ RSpec.describe 'register/verilog_top' do
       expect(registers[3]).to generate_code(:register_file, :top_down, <<~'CODE')
         generate if (1) begin : g_register_3
           genvar i;
+          for (i = 0;i < 2;i = i + 1) begin : g
+            wire w_bit_field_valid;
+            wire [31:0] w_bit_field_read_mask;
+            wire [31:0] w_bit_field_write_mask;
+            wire [31:0] w_bit_field_write_data;
+            wire [31:0] w_bit_field_read_data;
+            wire [31:0] w_bit_field_value;
+            `rggen_tie_off_unused_signals(32, 32'h00000303, w_bit_field_read_data, w_bit_field_value)
+            rggen_default_register #(
+              .READABLE       (1),
+              .WRITABLE       (1),
+              .ADDRESS_WIDTH  (8),
+              .OFFSET_ADDRESS (8'h30+8*i),
+              .BUS_WIDTH      (32),
+              .DATA_WIDTH     (32)
+            ) u_register (
+              .i_clk                  (i_clk),
+              .i_rst_n                (i_rst_n),
+              .i_register_valid       (w_register_valid),
+              .i_register_access      (w_register_access),
+              .i_register_address     (w_register_address),
+              .i_register_write_data  (w_register_write_data),
+              .i_register_strobe      (w_register_strobe),
+              .o_register_active      (w_register_active[1*(6+i)+:1]),
+              .o_register_ready       (w_register_ready[1*(6+i)+:1]),
+              .o_register_status      (w_register_status[2*(6+i)+:2]),
+              .o_register_read_data   (w_register_read_data[32*(6+i)+:32]),
+              .o_register_value       (w_register_value[32*(6+i)+0+:32]),
+              .o_bit_field_valid      (w_bit_field_valid),
+              .o_bit_field_read_mask  (w_bit_field_read_mask),
+              .o_bit_field_write_mask (w_bit_field_write_mask),
+              .o_bit_field_write_data (w_bit_field_write_data),
+              .i_bit_field_read_data  (w_bit_field_read_data),
+              .i_bit_field_value      (w_bit_field_value)
+            );
+            if (1) begin : g_bit_field_0
+              rggen_bit_field #(
+                .WIDTH          (2),
+                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
+              ) u_bit_field (
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[0+:2]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[0+:2]),
+                .i_sw_write_data    (w_bit_field_write_data[0+:2]),
+                .o_sw_read_data     (w_bit_field_read_data[0+:2]),
+                .o_sw_value         (w_bit_field_value[0+:2]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({2{1'b0}}),
+                .i_hw_set           ({2{1'b0}}),
+                .i_hw_clear         ({2{1'b0}}),
+                .i_value            ({2{1'b0}}),
+                .i_mask             ({2{1'b1}}),
+                .o_value            (o_register_3_bit_field_0[2*(i)+:2]),
+                .o_value_unmasked   ()
+              );
+            end
+            if (1) begin : g_bit_field_1
+              rggen_bit_field #(
+                .WIDTH          (2),
+                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
+              ) u_bit_field (
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[8+:2]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[8+:2]),
+                .i_sw_write_data    (w_bit_field_write_data[8+:2]),
+                .o_sw_read_data     (w_bit_field_read_data[8+:2]),
+                .o_sw_value         (w_bit_field_value[8+:2]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({2{1'b0}}),
+                .i_hw_set           ({2{1'b0}}),
+                .i_hw_clear         ({2{1'b0}}),
+                .i_value            ({2{1'b0}}),
+                .i_mask             ({2{1'b1}}),
+                .o_value            (o_register_3_bit_field_1[2*(i)+:2]),
+                .o_value_unmasked   ()
+              );
+            end
+          end
+        end endgenerate
+      CODE
+
+      expect(registers[4]).to generate_code(:register_file, :top_down, <<~'CODE')
+        generate if (1) begin : g_register_4
+          genvar i;
           genvar j;
           for (i = 0;i < 2;i = i + 1) begin : g
             for (j = 0;j < 2;j = j + 1) begin : g
@@ -451,7 +571,7 @@ RSpec.describe 'register/verilog_top' do
                 .READABLE             (1),
                 .WRITABLE             (1),
                 .ADDRESS_WIDTH        (8),
-                .OFFSET_ADDRESS       (8'h30),
+                .OFFSET_ADDRESS       (8'h40),
                 .BUS_WIDTH            (32),
                 .DATA_WIDTH           (32),
                 .INDIRECT_INDEX_WIDTH (4),
@@ -464,11 +584,11 @@ RSpec.describe 'register/verilog_top' do
                 .i_register_address     (w_register_address),
                 .i_register_write_data  (w_register_write_data),
                 .i_register_strobe      (w_register_strobe),
-                .o_register_active      (w_register_active[1*(6+2*i+j)+:1]),
-                .o_register_ready       (w_register_ready[1*(6+2*i+j)+:1]),
-                .o_register_status      (w_register_status[2*(6+2*i+j)+:2]),
-                .o_register_read_data   (w_register_read_data[32*(6+2*i+j)+:32]),
-                .o_register_value       (w_register_value[32*(6+2*i+j)+0+:32]),
+                .o_register_active      (w_register_active[1*(8+2*i+j)+:1]),
+                .o_register_ready       (w_register_ready[1*(8+2*i+j)+:1]),
+                .o_register_status      (w_register_status[2*(8+2*i+j)+:2]),
+                .o_register_read_data   (w_register_read_data[32*(8+2*i+j)+:32]),
+                .o_register_value       (w_register_value[32*(8+2*i+j)+0+:32]),
                 .i_indirect_index       (w_indirect_index),
                 .o_bit_field_valid      (w_bit_field_valid),
                 .o_bit_field_read_mask  (w_bit_field_read_mask),
@@ -501,7 +621,7 @@ RSpec.describe 'register/verilog_top' do
                   .i_hw_clear         ({2{1'b0}}),
                   .i_value            ({2{1'b0}}),
                   .i_mask             ({2{1'b1}}),
-                  .o_value            (o_register_3_bit_field_0[2*(2*i+j)+:2]),
+                  .o_value            (o_register_4_bit_field_0[2*(2*i+j)+:2]),
                   .o_value_unmasked   ()
                 );
               end
@@ -529,7 +649,7 @@ RSpec.describe 'register/verilog_top' do
                   .i_hw_clear         ({2{1'b0}}),
                   .i_value            ({2{1'b0}}),
                   .i_mask             ({2{1'b1}}),
-                  .o_value            (o_register_3_bit_field_1[2*(2*i+j)+:2]),
+                  .o_value            (o_register_4_bit_field_1[2*(2*i+j)+:2]),
                   .o_value_unmasked   ()
                 );
               end
@@ -538,8 +658,8 @@ RSpec.describe 'register/verilog_top' do
         end endgenerate
       CODE
 
-      expect(registers[4]).to generate_code(:register_file, :top_down, <<~'CODE')
-        generate if (1) begin : g_register_4
+      expect(registers[5]).to generate_code(:register_file, :top_down, <<~'CODE')
+        generate if (1) begin : g_register_5
           wire w_bit_field_valid;
           wire [31:0] w_bit_field_read_mask;
           wire [31:0] w_bit_field_write_mask;
@@ -551,10 +671,9 @@ RSpec.describe 'register/verilog_top' do
             .READABLE       (1),
             .WRITABLE       (1),
             .ADDRESS_WIDTH  (8),
-            .OFFSET_ADDRESS (8'h40),
+            .OFFSET_ADDRESS (8'h50),
             .BUS_WIDTH      (32),
-            .DATA_WIDTH     (32),
-            .REGISTER_INDEX (0)
+            .DATA_WIDTH     (32)
           ) u_register (
             .i_clk                  (i_clk),
             .i_rst_n                (i_rst_n),
@@ -563,11 +682,11 @@ RSpec.describe 'register/verilog_top' do
             .i_register_address     (w_register_address),
             .i_register_write_data  (w_register_write_data),
             .i_register_strobe      (w_register_strobe),
-            .o_register_active      (w_register_active[10+:1]),
-            .o_register_ready       (w_register_ready[10+:1]),
-            .o_register_status      (w_register_status[20+:2]),
-            .o_register_read_data   (w_register_read_data[320+:32]),
-            .o_register_value       (w_register_value[320+:32]),
+            .o_register_active      (w_register_active[12+:1]),
+            .o_register_ready       (w_register_ready[12+:1]),
+            .o_register_status      (w_register_status[24+:2]),
+            .o_register_read_data   (w_register_read_data[384+:32]),
+            .o_register_value       (w_register_value[384+:32]),
             .o_bit_field_valid      (w_bit_field_valid),
             .o_bit_field_read_mask  (w_bit_field_read_mask),
             .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -575,7 +694,7 @@ RSpec.describe 'register/verilog_top' do
             .i_bit_field_read_data  (w_bit_field_read_data),
             .i_bit_field_value      (w_bit_field_value)
           );
-          if (1) begin : g_register_4
+          if (1) begin : g_register_5
             rggen_bit_field #(
               .WIDTH          (2),
               .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
@@ -599,14 +718,14 @@ RSpec.describe 'register/verilog_top' do
               .i_hw_clear         ({2{1'b0}}),
               .i_value            ({2{1'b0}}),
               .i_mask             ({2{1'b1}}),
-              .o_value            (o_register_4),
+              .o_value            (o_register_5),
               .o_value_unmasked   ()
             );
           end
         end endgenerate
       CODE
 
-      expect(registers[5]).to generate_code(:register_file, :top_down, <<~'CODE')
+      expect(registers[6]).to generate_code(:register_file, :top_down, <<~'CODE')
         if (1) begin : g_register_0
           genvar k;
           genvar l;
@@ -623,10 +742,9 @@ RSpec.describe 'register/verilog_top' do
                 .READABLE       (1),
                 .WRITABLE       (1),
                 .ADDRESS_WIDTH  (8),
-                .OFFSET_ADDRESS (8'h50+16*(2*i+j)),
+                .OFFSET_ADDRESS (8'h60+16*(2*i+j)+4*(2*k+l)),
                 .BUS_WIDTH      (32),
-                .DATA_WIDTH     (32),
-                .REGISTER_INDEX (2*k+l)
+                .DATA_WIDTH     (32)
               ) u_register (
                 .i_clk                  (i_clk),
                 .i_rst_n                (i_rst_n),
@@ -635,11 +753,11 @@ RSpec.describe 'register/verilog_top' do
                 .i_register_address     (w_register_address),
                 .i_register_write_data  (w_register_write_data),
                 .i_register_strobe      (w_register_strobe),
-                .o_register_active      (w_register_active[1*(11+4*(2*i+j)+2*k+l)+:1]),
-                .o_register_ready       (w_register_ready[1*(11+4*(2*i+j)+2*k+l)+:1]),
-                .o_register_status      (w_register_status[2*(11+4*(2*i+j)+2*k+l)+:2]),
-                .o_register_read_data   (w_register_read_data[32*(11+4*(2*i+j)+2*k+l)+:32]),
-                .o_register_value       (w_register_value[32*(11+4*(2*i+j)+2*k+l)+0+:32]),
+                .o_register_active      (w_register_active[1*(13+4*(2*i+j)+2*k+l)+:1]),
+                .o_register_ready       (w_register_ready[1*(13+4*(2*i+j)+2*k+l)+:1]),
+                .o_register_status      (w_register_status[2*(13+4*(2*i+j)+2*k+l)+:2]),
+                .o_register_read_data   (w_register_read_data[32*(13+4*(2*i+j)+2*k+l)+:32]),
+                .o_register_value       (w_register_value[32*(13+4*(2*i+j)+2*k+l)+0+:32]),
                 .o_bit_field_valid      (w_bit_field_valid),
                 .o_bit_field_read_mask  (w_bit_field_read_mask),
                 .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -671,10 +789,80 @@ RSpec.describe 'register/verilog_top' do
                   .i_hw_clear         ({2{1'b0}}),
                   .i_value            ({2{1'b0}}),
                   .i_mask             ({2{1'b1}}),
-                  .o_value            (o_register_file_5_register_file_0_register_0_bit_field_0[2*(8*i+4*j+2*k+l)+:2]),
+                  .o_value            (o_register_file_6_register_file_0_register_0_bit_field_0[2*(8*i+4*j+2*k+l)+:2]),
                   .o_value_unmasked   ()
                 );
               end
+            end
+          end
+        end
+      CODE
+
+      expect(registers[7]).to generate_code(:register_file, :top_down, <<~'CODE')
+        if (1) begin : g_register_0
+          genvar j;
+          for (j = 0;j < 2;j = j + 1) begin : g
+            wire w_bit_field_valid;
+            wire [31:0] w_bit_field_read_mask;
+            wire [31:0] w_bit_field_write_mask;
+            wire [31:0] w_bit_field_write_data;
+            wire [31:0] w_bit_field_read_data;
+            wire [31:0] w_bit_field_value;
+            `rggen_tie_off_unused_signals(32, 32'h00000003, w_bit_field_read_data, w_bit_field_value)
+            rggen_default_register #(
+              .READABLE       (1),
+              .WRITABLE       (1),
+              .ADDRESS_WIDTH  (8),
+              .OFFSET_ADDRESS (8'ha0+32*i+8*j),
+              .BUS_WIDTH      (32),
+              .DATA_WIDTH     (32)
+            ) u_register (
+              .i_clk                  (i_clk),
+              .i_rst_n                (i_rst_n),
+              .i_register_valid       (w_register_valid),
+              .i_register_access      (w_register_access),
+              .i_register_address     (w_register_address),
+              .i_register_write_data  (w_register_write_data),
+              .i_register_strobe      (w_register_strobe),
+              .o_register_active      (w_register_active[1*(29+2*i+j)+:1]),
+              .o_register_ready       (w_register_ready[1*(29+2*i+j)+:1]),
+              .o_register_status      (w_register_status[2*(29+2*i+j)+:2]),
+              .o_register_read_data   (w_register_read_data[32*(29+2*i+j)+:32]),
+              .o_register_value       (w_register_value[32*(29+2*i+j)+0+:32]),
+              .o_bit_field_valid      (w_bit_field_valid),
+              .o_bit_field_read_mask  (w_bit_field_read_mask),
+              .o_bit_field_write_mask (w_bit_field_write_mask),
+              .o_bit_field_write_data (w_bit_field_write_data),
+              .i_bit_field_read_data  (w_bit_field_read_data),
+              .i_bit_field_value      (w_bit_field_value)
+            );
+            if (1) begin : g_bit_field_0
+              rggen_bit_field #(
+                .WIDTH          (2),
+                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .SW_WRITE_ONCE  (0),
+                .TRIGGER        (0)
+              ) u_bit_field (
+                .i_clk              (i_clk),
+                .i_rst_n            (i_rst_n),
+                .i_sw_valid         (w_bit_field_valid),
+                .i_sw_read_mask     (w_bit_field_read_mask[0+:2]),
+                .i_sw_write_enable  (1'b1),
+                .i_sw_write_mask    (w_bit_field_write_mask[0+:2]),
+                .i_sw_write_data    (w_bit_field_write_data[0+:2]),
+                .o_sw_read_data     (w_bit_field_read_data[0+:2]),
+                .o_sw_value         (w_bit_field_value[0+:2]),
+                .o_write_trigger    (),
+                .o_read_trigger     (),
+                .i_hw_write_enable  (1'b0),
+                .i_hw_write_data    ({2{1'b0}}),
+                .i_hw_set           ({2{1'b0}}),
+                .i_hw_clear         ({2{1'b0}}),
+                .i_value            ({2{1'b0}}),
+                .i_mask             ({2{1'b1}}),
+                .o_value            (o_register_file_7_register_file_0_register_0_bit_field_0[2*(2*i+j)+:2]),
+                .o_value_unmasked   ()
+              );
             end
           end
         end
