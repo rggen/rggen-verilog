@@ -16,7 +16,7 @@ RgGen.define_simple_feature(:register, :verilog_rtl_header) do
     end
 
     def byte_size
-      register.byte_size(hierarchical: true)
+      register.total_byte_size(hierarchical: true)
     end
 
     def array?
