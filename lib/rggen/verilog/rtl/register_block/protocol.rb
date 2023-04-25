@@ -21,6 +21,9 @@ RgGen.define_list_feature(:register_block, :protocol) do
         parameter :default_read_data, {
           name: 'DEFAULT_READ_DATA', width: bus_width, default: 0
         }
+        parameter :insert_slicer, {
+          name: 'INSERT_SLICER', default: 0
+        }
       end
 
       private
