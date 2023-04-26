@@ -6,6 +6,7 @@ RgGen.define_simple_feature(:bit_field, :verilog_rtl_header) do
       define_macro("#{full_name}_bit_width", width)
       define_macro("#{full_name}_bit_mask", mask)
       define_offset_macro
+      define_label_macros
     end
 
     private
@@ -25,6 +26,14 @@ RgGen.define_simple_feature(:bit_field, :verilog_rtl_header) do
         end
       else
         define_macro("#{full_name}_bit_offset", bit_field.lsb)
+      end
+    end
+
+    def define_label_macros
+      bit_field.labels.each do |label|
+        name = "#{full_name}_#{label.name}"
+        value = hex(label.value, bit_field.width)
+        define_macro(name, value)
       end
     end
   end
