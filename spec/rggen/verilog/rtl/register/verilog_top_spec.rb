@@ -268,7 +268,7 @@ RSpec.describe 'register/verilog_top' do
           if (1) begin : g_bit_field_0
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+              .INITIAL_VALUE  (2'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -296,7 +296,7 @@ RSpec.describe 'register/verilog_top' do
           if (1) begin : g_bit_field_1
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+              .INITIAL_VALUE  (2'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -330,7 +330,7 @@ RSpec.describe 'register/verilog_top' do
             .ADDRESS_WIDTH  (8),
             .BUS_WIDTH      (32),
             .START_ADDRESS  (8'h10),
-            .END_ADDRESS    (8'h1f)
+            .BYTE_SIZE      (16)
           ) u_register (
             .i_clk                  (i_clk),
             .i_rst_n                (i_rst_n),
@@ -397,7 +397,7 @@ RSpec.describe 'register/verilog_top' do
             if (1) begin : g_bit_field_0
               rggen_bit_field #(
                 .WIDTH          (2),
-                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .INITIAL_VALUE  (2'h0),
                 .SW_WRITE_ONCE  (0),
                 .TRIGGER        (0)
               ) u_bit_field (
@@ -425,7 +425,7 @@ RSpec.describe 'register/verilog_top' do
             if (1) begin : g_bit_field_1
               rggen_bit_field #(
                 .WIDTH          (2),
-                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .INITIAL_VALUE  (2'h0),
                 .SW_WRITE_ONCE  (0),
                 .TRIGGER        (0)
               ) u_bit_field (
@@ -495,7 +495,7 @@ RSpec.describe 'register/verilog_top' do
             if (1) begin : g_bit_field_0
               rggen_bit_field #(
                 .WIDTH          (2),
-                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .INITIAL_VALUE  (2'h0),
                 .SW_WRITE_ONCE  (0),
                 .TRIGGER        (0)
               ) u_bit_field (
@@ -523,7 +523,7 @@ RSpec.describe 'register/verilog_top' do
             if (1) begin : g_bit_field_1
               rggen_bit_field #(
                 .WIDTH          (2),
-                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .INITIAL_VALUE  (2'h0),
                 .SW_WRITE_ONCE  (0),
                 .TRIGGER        (0)
               ) u_bit_field (
@@ -600,7 +600,7 @@ RSpec.describe 'register/verilog_top' do
               if (1) begin : g_bit_field_0
                 rggen_bit_field #(
                   .WIDTH          (2),
-                  .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                  .INITIAL_VALUE  (2'h0),
                   .SW_WRITE_ONCE  (0),
                   .TRIGGER        (0)
                 ) u_bit_field (
@@ -628,7 +628,7 @@ RSpec.describe 'register/verilog_top' do
               if (1) begin : g_bit_field_1
                 rggen_bit_field #(
                   .WIDTH          (2),
-                  .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                  .INITIAL_VALUE  (2'h0),
                   .SW_WRITE_ONCE  (0),
                   .TRIGGER        (0)
                 ) u_bit_field (
@@ -697,7 +697,7 @@ RSpec.describe 'register/verilog_top' do
           if (1) begin : g_register_5
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+              .INITIAL_VALUE  (2'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -768,7 +768,7 @@ RSpec.describe 'register/verilog_top' do
               if (1) begin : g_bit_field_0
                 rggen_bit_field #(
                   .WIDTH          (2),
-                  .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                  .INITIAL_VALUE  (2'h0),
                   .SW_WRITE_ONCE  (0),
                   .TRIGGER        (0)
                 ) u_bit_field (
@@ -839,7 +839,7 @@ RSpec.describe 'register/verilog_top' do
             if (1) begin : g_bit_field_0
               rggen_bit_field #(
                 .WIDTH          (2),
-                .INITIAL_VALUE  (`rggen_slice(2'h0, 2, 0)),
+                .INITIAL_VALUE  (2'h0),
                 .SW_WRITE_ONCE  (0),
                 .TRIGGER        (0)
               ) u_bit_field (

@@ -310,7 +310,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_0
           rggen_bit_field #(
             .WIDTH          (1),
-            .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+            .INITIAL_VALUE  (1'h0),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -341,7 +341,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_1
           rggen_bit_field #(
             .WIDTH          (8),
-            .INITIAL_VALUE  (`rggen_slice(8'h00, 8, 0)),
+            .INITIAL_VALUE  (8'h00),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -374,7 +374,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (1),
-              .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+              .INITIAL_VALUE  (1'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -408,7 +408,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(REGISTER_0_BIT_FIELD_3_INITIAL_VALUE, 2, i)),
+              .INITIAL_VALUE  (`rggen_slice(REGISTER_0_BIT_FIELD_3_INITIAL_VALUE, 4, 2, i)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -442,7 +442,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (i = 0;i < 2;i = i + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, i)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 4, 2, i)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -474,7 +474,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_0
           rggen_bit_field #(
             .WIDTH          (1),
-            .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+            .INITIAL_VALUE  (1'h0),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -505,7 +505,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_1
           rggen_bit_field #(
             .WIDTH          (8),
-            .INITIAL_VALUE  (`rggen_slice(8'h00, 8, 0)),
+            .INITIAL_VALUE  (8'h00),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -538,7 +538,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (1),
-              .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+              .INITIAL_VALUE  (1'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -572,7 +572,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(REGISTER_1_BIT_FIELD_3_INITIAL_VALUE, 2, j)),
+              .INITIAL_VALUE  (`rggen_slice(REGISTER_1_BIT_FIELD_3_INITIAL_VALUE, 4, 2, j)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -606,7 +606,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, j)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 4, 2, j)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -638,7 +638,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_0
           rggen_bit_field #(
             .WIDTH          (1),
-            .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+            .INITIAL_VALUE  (1'h0),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -669,7 +669,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_bit_field_1
           rggen_bit_field #(
             .WIDTH          (8),
-            .INITIAL_VALUE  (`rggen_slice(8'h00, 8, 0)),
+            .INITIAL_VALUE  (8'h00),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (
@@ -702,7 +702,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (1),
-              .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+              .INITIAL_VALUE  (1'h0),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -736,7 +736,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(REGISTER_2_BIT_FIELD_3_INITIAL_VALUE, 2, k)),
+              .INITIAL_VALUE  (`rggen_slice(REGISTER_2_BIT_FIELD_3_INITIAL_VALUE, 4, 2, k)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -770,7 +770,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(4'h4, 2, k)),
+              .INITIAL_VALUE  (`rggen_slice(4'h4, 4, 2, k)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -802,7 +802,7 @@ RSpec.describe 'bit_field/verilog_top' do
         if (1) begin : g_register_3
           rggen_bit_field #(
             .WIDTH          (32),
-            .INITIAL_VALUE  (`rggen_slice(32'h00000000, 32, 0)),
+            .INITIAL_VALUE  (32'h00000000),
             .SW_WRITE_ONCE  (0),
             .TRIGGER        (0)
           ) u_bit_field (

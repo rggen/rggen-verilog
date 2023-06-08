@@ -212,7 +212,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[0]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -245,7 +245,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[1]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_NONE),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -278,7 +278,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[2]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -311,7 +311,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[3]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_SET),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -344,7 +344,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[4]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_CLEAR),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -410,7 +410,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[6]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -443,7 +443,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[7]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_SET),
           .SW_WRITE_ONCE      (0),
@@ -476,7 +476,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[8]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_0_SET),
           .SW_WRITE_ONCE      (0),
@@ -509,7 +509,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[9]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_1_SET),
           .SW_WRITE_ONCE      (0),
@@ -542,7 +542,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[10]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_CLEAR),
           .SW_WRITE_ONCE      (0),
@@ -575,7 +575,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[11]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_0_CLEAR),
           .SW_WRITE_ONCE      (0),
@@ -608,7 +608,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[12]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_1_CLEAR),
           .SW_WRITE_ONCE      (0),
@@ -641,7 +641,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[13]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_0_TOGGLE),
           .SW_WRITE_ONCE      (0),
@@ -674,7 +674,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[14]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_1_TOGGLE),
           .SW_WRITE_ONCE      (0),
@@ -707,7 +707,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[15]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (1),
@@ -740,7 +740,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[16]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -773,7 +773,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[17]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -806,7 +806,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[18]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -839,7 +839,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[19]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),
@@ -872,7 +872,7 @@ RSpec.describe 'bit_field/type/custom' do
       expect(bit_fields[20]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH              (2),
-          .INITIAL_VALUE      (`rggen_slice(2'h0, 2, 0)),
+          .INITIAL_VALUE      (2'h0),
           .SW_READ_ACTION     (`RGGEN_READ_DEFAULT),
           .SW_WRITE_ACTION    (`RGGEN_WRITE_DEFAULT),
           .SW_WRITE_ONCE      (0),

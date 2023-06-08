@@ -16,6 +16,10 @@ module RgGen
       def fill_1(width)
         "{#{width}{1'b1}}"
       end
+
+      def width_cast(expression, _width)
+        expression
+      end
     end
   end
 end
