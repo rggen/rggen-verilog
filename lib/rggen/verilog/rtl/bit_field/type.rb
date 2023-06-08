@@ -22,8 +22,17 @@ RgGen.define_list_feature(:bit_field, :type) do
       end
 
       def initial_value
-        index = bit_field.initial_value_array? && bit_field.local_index || 0
-        macro_call('rggen_slice', [bit_field.initial_value, width, index])
+        if multiple_initial_values?
+          index = bit_field.local_index
+          total_bits = width * bit_field.sequence_size
+          macro_call('rggen_slice', [bit_field.initial_value, total_bits, width, index])
+        else
+          bit_field.initial_value
+        end
+      end
+
+      def multiple_initial_values?
+        bit_field.initial_value_array? && bit_field.sequence_size > 1
       end
 
       def clock

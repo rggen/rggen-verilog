@@ -164,7 +164,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[0]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (1),
-          .INITIAL_VALUE  (`rggen_slice(1'h0, 1, 0)),
+          .INITIAL_VALUE  (1'h0),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -193,7 +193,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[1]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (16),
-          .INITIAL_VALUE  (`rggen_slice(16'habcd, 16, 0)),
+          .INITIAL_VALUE  (16'habcd),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -223,7 +223,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[2]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (64),
-          .INITIAL_VALUE  (`rggen_slice(64'h0000000000000000, 64, 0)),
+          .INITIAL_VALUE  (64'h0000000000000000),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -252,7 +252,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[3]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (4),
-          .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
+          .INITIAL_VALUE  (4'h0),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -281,7 +281,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[4]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (4),
-          .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
+          .INITIAL_VALUE  (4'h0),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -310,7 +310,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[5]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (4),
-          .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
+          .INITIAL_VALUE  (4'h0),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (
@@ -339,7 +339,7 @@ RSpec.describe 'bit_field/type/w1' do
       expect(bit_fields[6]).to generate_code(:bit_field, :top_down, <<~'CODE')
         rggen_bit_field #(
           .WIDTH          (4),
-          .INITIAL_VALUE  (`rggen_slice(4'h0, 4, 0)),
+          .INITIAL_VALUE  (4'h0),
           .SW_WRITE_ONCE  (1),
           .TRIGGER        (0)
         ) u_bit_field (

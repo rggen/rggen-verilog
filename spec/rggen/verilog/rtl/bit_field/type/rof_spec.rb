@@ -55,7 +55,7 @@ RSpec.describe 'bit_field/type/rof' do
           .i_hw_write_data    ({1{1'b0}}),
           .i_hw_set           ({1{1'b0}}),
           .i_hw_clear         ({1{1'b0}}),
-          .i_value            (`rggen_slice(1'h0, 1, 0)),
+          .i_value            (1'h0),
           .i_mask             ({1{1'b1}}),
           .o_value            (),
           .o_value_unmasked   ()
@@ -83,7 +83,7 @@ RSpec.describe 'bit_field/type/rof' do
           .i_hw_write_data    ({16{1'b0}}),
           .i_hw_set           ({16{1'b0}}),
           .i_hw_clear         ({16{1'b0}}),
-          .i_value            (`rggen_slice(16'habcd, 16, 0)),
+          .i_value            (16'habcd),
           .i_mask             ({16{1'b1}}),
           .o_value            (),
           .o_value_unmasked   ()
@@ -111,7 +111,7 @@ RSpec.describe 'bit_field/type/rof' do
           .i_hw_write_data    ({1{1'b0}}),
           .i_hw_set           ({1{1'b0}}),
           .i_hw_clear         ({1{1'b0}}),
-          .i_value            (`rggen_slice(1'h0, 1, 0)),
+          .i_value            (1'h0),
           .i_mask             ({1{1'b1}}),
           .o_value            (),
           .o_value_unmasked   ()
@@ -139,7 +139,7 @@ RSpec.describe 'bit_field/type/rof' do
           .i_hw_write_data    ({16{1'b0}}),
           .i_hw_set           ({16{1'b0}}),
           .i_hw_clear         ({16{1'b0}}),
-          .i_value            (`rggen_slice(16'habcd, 16, 0)),
+          .i_value            (16'habcd),
           .i_mask             ({16{1'b1}}),
           .o_value            (),
           .o_value_unmasked   ()

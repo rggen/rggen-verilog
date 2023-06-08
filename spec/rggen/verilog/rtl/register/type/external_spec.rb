@@ -71,7 +71,7 @@ RSpec.describe 'register/type/external' do
           .ADDRESS_WIDTH  (8),
           .BUS_WIDTH      (32),
           .START_ADDRESS  (8'h00),
-          .END_ADDRESS    (8'h03)
+          .BYTE_SIZE      (4)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -101,7 +101,7 @@ RSpec.describe 'register/type/external' do
           .ADDRESS_WIDTH  (8),
           .BUS_WIDTH      (32),
           .START_ADDRESS  (8'h80),
-          .END_ADDRESS    (8'hff)
+          .BYTE_SIZE      (128)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
