@@ -3,6 +3,10 @@
 RgGen.define_list_item_feature(:register, :type, :external) do
   verilog_rtl do
     build do
+      parameter :strobe_width, {
+        name: "#{register.name}_strobe_width".upcase,
+        default: configuration.bus_width / 8
+      }
       output :external_valid, {
         name: "o_#{register.name}_valid", width: 1
       }
@@ -16,7 +20,7 @@ RgGen.define_list_item_feature(:register, :type, :external) do
         name: "o_#{register.name}_data", width: bus_width
       }
       output :external_strobe, {
-        name: "o_#{register.name}_strobe", width: bus_width / 8
+        name: "o_#{register.name}_strobe", width: strobe_width
       }
       input :external_ready, {
         name: "i_#{register.name}_ready", width: 1
