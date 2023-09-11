@@ -329,6 +329,7 @@ RSpec.describe 'register/verilog_top' do
           rggen_external_register #(
             .ADDRESS_WIDTH  (8),
             .BUS_WIDTH      (32),
+            .STROBE_WIDTH   (REGISTER_1_STROBE_WIDTH),
             .START_ADDRESS  (8'h10),
             .BYTE_SIZE      (16)
           ) u_register (
