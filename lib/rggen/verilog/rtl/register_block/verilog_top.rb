@@ -23,7 +23,7 @@ RgGen.define_simple_feature(:register_block, :verilog_top) do
         name: 'w_register_write_data', width: bus_width
       }
       wire :register_strobe, {
-        name: 'w_register_strobe', width: bus_width / 8
+        name: 'w_register_strobe', width: bus_width
       }
       wire :register_active, {
         name: 'w_register_active', width: 1, array_size: [total_registers]

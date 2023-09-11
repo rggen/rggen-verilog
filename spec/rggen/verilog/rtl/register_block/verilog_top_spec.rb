@@ -53,7 +53,7 @@ RSpec.describe 'register_block/verilog_top' do
       )
       expect(register_block).to have_wire(
         :register_strobe,
-        name: 'w_register_strobe', width: bus_width / 8
+        name: 'w_register_strobe', width: bus_width
       )
       expect(register_block).to have_wire(
         :register_active,
