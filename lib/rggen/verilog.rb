@@ -46,6 +46,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/rtl/bit_field/type/rwc',
     'verilog/rtl/bit_field/type/rwe_rwl',
     'verilog/rtl/bit_field/type/rwhw',
+    'verilog/rtl/bit_field/type/rws',
     'verilog/rtl/bit_field/type/w0crs_w0src_w1crs_w1src_wcrs_wsrc',
     'verilog/rtl/bit_field/type/w0t_w1t',
     'verilog/rtl/bit_field/type/w0trg_w1trg',

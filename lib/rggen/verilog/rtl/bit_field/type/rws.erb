@@ -1,0 +1,25 @@
+rggen_bit_field #(
+  .WIDTH          (<%= width %>),
+  .INITIAL_VALUE  (<%= initial_value %>),
+  .HW_SET_WIDTH   (1)
+) u_bit_field (
+  .i_clk              (<%= clock %>),
+  .i_rst_n            (<%= reset %>),
+  .i_sw_valid         (<%= bit_field_valid %>),
+  .i_sw_read_mask     (<%= bit_field_read_mask %>),
+  .i_sw_write_enable  (1'b1),
+  .i_sw_write_mask    (<%= bit_field_write_mask %>),
+  .i_sw_write_data    (<%= bit_field_write_data %>),
+  .o_sw_read_data     (<%= bit_field_read_data %>),
+  .o_sw_value         (<%= bit_field_value %>),
+  .o_write_trigger    (),
+  .o_read_trigger     (),
+  .i_hw_write_enable  (1'b0),
+  .i_hw_write_data    (<%= fill_0(width) %>),
+  .i_hw_set           (<%= set_signal %>),
+  .i_hw_clear         (<%= fill_0(width) %>),
+  .i_value            (<%= fill_0(width) %>),
+  .i_mask             (<%= fill_1(width) %>),
+  .o_value            (<%= value_out[loop_variables] %>),
+  .o_value_unmasked   ()
+);
