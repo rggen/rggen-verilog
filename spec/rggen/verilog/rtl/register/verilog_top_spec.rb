@@ -559,7 +559,7 @@ RSpec.describe 'register/verilog_top' do
           genvar j;
           for (i = 0;i < 2;i = i + 1) begin : g
             for (j = 0;j < 2;j = j + 1) begin : g
-              wire [3:0] w_indirect_index;
+              wire [1:0] w_indirect_match;
               wire w_bit_field_valid;
               wire [31:0] w_bit_field_read_mask;
               wire [31:0] w_bit_field_write_mask;
@@ -567,7 +567,8 @@ RSpec.describe 'register/verilog_top' do
               wire [31:0] w_bit_field_read_data;
               wire [31:0] w_bit_field_value;
               `rggen_tie_off_unused_signals(32, 32'h00000303, w_bit_field_read_data, w_bit_field_value)
-              assign w_indirect_index = {w_register_value[0+:2], w_register_value[8+:2]};
+              assign w_indirect_match[0] = w_register_value[0+:2] == i[0+:2];
+              assign w_indirect_match[1] = w_register_value[8+:2] == j[0+:2];
               rggen_indirect_register #(
                 .READABLE             (1),
                 .WRITABLE             (1),
@@ -575,8 +576,7 @@ RSpec.describe 'register/verilog_top' do
                 .OFFSET_ADDRESS       (8'h40),
                 .BUS_WIDTH            (32),
                 .DATA_WIDTH           (32),
-                .INDIRECT_INDEX_WIDTH (4),
-                .INDIRECT_INDEX_VALUE ({i[0+:2], j[0+:2]})
+                .INDIRECT_MATCH_WIDTH (2)
               ) u_register (
                 .i_clk                  (i_clk),
                 .i_rst_n                (i_rst_n),
@@ -590,7 +590,7 @@ RSpec.describe 'register/verilog_top' do
                 .o_register_status      (w_register_status[2*(8+2*i+j)+:2]),
                 .o_register_read_data   (w_register_read_data[32*(8+2*i+j)+:32]),
                 .o_register_value       (w_register_value[32*(8+2*i+j)+0+:32]),
-                .i_indirect_index       (w_indirect_index),
+                .i_indirect_match       (w_indirect_match),
                 .o_bit_field_valid      (w_bit_field_valid),
                 .o_bit_field_read_mask  (w_bit_field_read_mask),
                 .o_bit_field_write_mask (w_bit_field_write_mask),

@@ -159,22 +159,22 @@ RSpec.describe 'register/type/indirect' do
     verilog.registers
   end
 
-  it '間接アクセス用インデックス#indirect_indexを持つ' do
+  it '#indirect_matchを持つ' do
     expect(registers[4]).to have_wire(
-      :indirect_index,
-      name: 'w_indirect_index', width: 1
+      :indirect_match,
+      name: 'w_indirect_match', width: 1
     )
     expect(registers[5]).to have_wire(
-      :indirect_index,
-      name: 'w_indirect_index', width: 2
+      :indirect_match,
+      name: 'w_indirect_match', width: 1
     )
     expect(registers[6]).to have_wire(
-      :indirect_index,
-      name: 'w_indirect_index', width: 6
+      :indirect_match,
+      name: 'w_indirect_match', width: 2
     )
     expect(registers[7]).to have_wire(
-      :indirect_index,
-      name: 'w_indirect_index', width: 7
+      :indirect_match,
+      name: 'w_indirect_match', width: 3
     )
   end
 
@@ -182,7 +182,7 @@ RSpec.describe 'register/type/indirect' do
     it 'rggen_indirect_registerをインスタンスするコードを出力する' do
       expect(registers[4]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[0+:1]};
+        assign w_indirect_match = w_register_value[0+:1] == 1'h1;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -190,8 +190,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h10),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (1),
-          .INDIRECT_INDEX_VALUE ({1'h1})
+          .INDIRECT_MATCH_WIDTH (1)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -205,7 +204,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[8+:2]),
           .o_register_read_data   (w_register_read_data[128+:32]),
           .o_register_value       (w_register_value[128+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -217,7 +216,7 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[5]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[8+:2]};
+        assign w_indirect_match = w_register_value[8+:2] == i[0+:2];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -225,8 +224,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h14),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (2),
-          .INDIRECT_INDEX_VALUE ({i[0+:2]})
+          .INDIRECT_MATCH_WIDTH (1)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -240,7 +238,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(5+i)+:2]),
           .o_register_read_data   (w_register_read_data[32*(5+i)+:32]),
           .o_register_value       (w_register_value[32*(5+i)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -252,7 +250,8 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[6]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[8+:2], w_register_value[16+:4]};
+        assign w_indirect_match[0] = w_register_value[8+:2] == i[0+:2];
+        assign w_indirect_match[1] = w_register_value[16+:4] == j[0+:4];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -260,8 +259,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h18),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (6),
-          .INDIRECT_INDEX_VALUE ({i[0+:2], j[0+:4]})
+          .INDIRECT_MATCH_WIDTH (2)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -275,7 +273,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(7+4*i+j)+:2]),
           .o_register_read_data   (w_register_read_data[32*(7+4*i+j)+:32]),
           .o_register_value       (w_register_value[32*(7+4*i+j)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -287,7 +285,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[7]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[0+:1], w_register_value[8+:2], w_register_value[16+:4]};
+        assign w_indirect_match[0] = w_register_value[0+:1] == 1'h0;
+        assign w_indirect_match[1] = w_register_value[8+:2] == i[0+:2];
+        assign w_indirect_match[2] = w_register_value[16+:4] == j[0+:4];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -295,8 +295,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h1c),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (7),
-          .INDIRECT_INDEX_VALUE ({1'h0, i[0+:2], j[0+:4]})
+          .INDIRECT_MATCH_WIDTH (3)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -310,7 +309,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(15+4*i+j)+:2]),
           .o_register_read_data   (w_register_read_data[32*(15+4*i+j)+:32]),
           .o_register_value       (w_register_value[32*(15+4*i+j)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -322,7 +321,7 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[8]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[0+:1]};
+        assign w_indirect_match = w_register_value[0+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (0),
@@ -330,8 +329,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h20),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (1),
-          .INDIRECT_INDEX_VALUE ({1'h0})
+          .INDIRECT_MATCH_WIDTH (1)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -345,7 +343,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[46+:2]),
           .o_register_read_data   (w_register_read_data[736+:32]),
           .o_register_value       (w_register_value[736+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -357,7 +355,7 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[9]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[0+:1]};
+        assign w_indirect_match = w_register_value[0+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (0),
           .WRITABLE             (1),
@@ -365,8 +363,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h24),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (1),
-          .INDIRECT_INDEX_VALUE ({1'h0})
+          .INDIRECT_MATCH_WIDTH (1)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -380,7 +377,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[48+:2]),
           .o_register_read_data   (w_register_read_data[768+:32]),
           .o_register_value       (w_register_value[768+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -392,7 +389,8 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[10]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[32+:2], w_register_value[64+:2]};
+        assign w_indirect_match[0] = w_register_value[32+:2] == i[0+:2];
+        assign w_indirect_match[1] = w_register_value[64+:2] == 2'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -400,8 +398,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h28),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (4),
-          .INDIRECT_INDEX_VALUE ({i[0+:2], 2'h0})
+          .INDIRECT_MATCH_WIDTH (2)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -415,7 +412,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(25+i)+:2]),
           .o_register_read_data   (w_register_read_data[32*(25+i)+:32]),
           .o_register_value       (w_register_value[32*(25+i)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -427,7 +424,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[11]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[96+:1], w_register_value[104+:2], w_register_value[112+:4]};
+        assign w_indirect_match[0] = w_register_value[96+:1] == 1'h0;
+        assign w_indirect_match[1] = w_register_value[104+:2] == i[0+:2];
+        assign w_indirect_match[2] = w_register_value[112+:4] == j[0+:4];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -435,8 +434,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h2c),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (7),
-          .INDIRECT_INDEX_VALUE ({1'h0, i[0+:2], j[0+:4]})
+          .INDIRECT_MATCH_WIDTH (3)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -450,7 +448,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(27+4*i+j)+:2]),
           .o_register_read_data   (w_register_read_data[32*(27+4*i+j)+:32]),
           .o_register_value       (w_register_value[32*(27+4*i+j)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -462,7 +460,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[12]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[0+:1], w_register_value[8+:2], w_register_value[16+:4]};
+        assign w_indirect_match[0] = w_register_value[0+:1] == 1'h0;
+        assign w_indirect_match[1] = w_register_value[8+:2] == k[0+:2];
+        assign w_indirect_match[2] = w_register_value[16+:4] == l[0+:4];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -470,8 +470,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h30+8*(2*i+j)),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (7),
-          .INDIRECT_INDEX_VALUE ({1'h0, k[0+:2], l[0+:4]})
+          .INDIRECT_MATCH_WIDTH (3)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -485,7 +484,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(35+16*(2*i+j)+4*k+l)+:2]),
           .o_register_read_data   (w_register_read_data[32*(35+16*(2*i+j)+4*k+l)+:32]),
           .o_register_value       (w_register_value[32*(35+16*(2*i+j)+4*k+l)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
@@ -497,7 +496,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[13]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_index = {w_register_value[96+:1], w_register_value[104+:2], w_register_value[112+:4]};
+        assign w_indirect_match[0] = w_register_value[96+:1] == 1'h0;
+        assign w_indirect_match[1] = w_register_value[104+:2] == k[0+:2];
+        assign w_indirect_match[2] = w_register_value[112+:4] == l[0+:4];
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -505,8 +506,7 @@ RSpec.describe 'register/type/indirect' do
           .OFFSET_ADDRESS       (8'h30+8*(2*i+j)+8'h04),
           .BUS_WIDTH            (32),
           .DATA_WIDTH           (32),
-          .INDIRECT_INDEX_WIDTH (7),
-          .INDIRECT_INDEX_VALUE ({1'h0, k[0+:2], l[0+:4]})
+          .INDIRECT_MATCH_WIDTH (3)
         ) u_register (
           .i_clk                  (i_clk),
           .i_rst_n                (i_rst_n),
@@ -520,7 +520,7 @@ RSpec.describe 'register/type/indirect' do
           .o_register_status      (w_register_status[2*(35+16*(2*i+j)+8+4*k+l)+:2]),
           .o_register_read_data   (w_register_read_data[32*(35+16*(2*i+j)+8+4*k+l)+:32]),
           .o_register_value       (w_register_value[32*(35+16*(2*i+j)+8+4*k+l)+0+:32]),
-          .i_indirect_index       (w_indirect_index),
+          .i_indirect_match       (w_indirect_match),
           .o_bit_field_valid      (w_bit_field_valid),
           .o_bit_field_read_mask  (w_bit_field_read_mask),
           .o_bit_field_write_mask (w_bit_field_write_mask),
