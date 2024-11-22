@@ -5,8 +5,7 @@ rggen_indirect_register #(
   .OFFSET_ADDRESS       (<%= offset_address %>),
   .BUS_WIDTH            (<%= bus_width %>),
   .DATA_WIDTH           (<%= width %>),
-  .INDIRECT_INDEX_WIDTH (<%= index_width %>),
-  .INDIRECT_INDEX_VALUE (<%= concat(index_values) %>)
+  .INDIRECT_MATCH_WIDTH (<%= index_match_width %>)
 ) u_register (
   .i_clk                  (<%= clock %>),
   .i_rst_n                (<%= reset %>),
@@ -20,7 +19,7 @@ rggen_indirect_register #(
   .o_register_status      (<%= register_status %>),
   .o_register_read_data   (<%= register_read_data %>),
   .o_register_value       (<%= register_value %>),
-  .i_indirect_index       (<%= indirect_index %>),
+  .i_indirect_match       (<%= indirect_match %>),
   .o_bit_field_valid      (<%= bit_field_valid %>),
   .o_bit_field_read_mask  (<%= bit_field_read_mask %>),
   .o_bit_field_write_mask (<%= bit_field_write_mask %>),
