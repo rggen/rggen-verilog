@@ -5,8 +5,8 @@ module RgGen
     module Utility
       private
 
-      def local_scope(name, attributes = {}, &block)
-        LocalScope.new(attributes.merge(name: name), &block).to_code
+      def local_scope(name, attributes = {}, &)
+        LocalScope.new(attributes.merge(name:), &).to_code
       end
 
       def fill_0(width)
