@@ -8,20 +8,20 @@ module RgGen
 
         private
 
-        def create_variable(data_type, attributes, &block)
+        def create_variable(data_type, attributes, &)
           attributes = attributes.merge(array_format: :serialized)
           super
         end
 
-        def create_port(direction, attributes, &block)
+        def create_port(direction, attributes, &)
           attributes =
             attributes
               .except(:data_type)
-              .merge(direction: direction, array_format: :serialized)
-          DataObject.new(:argument, attributes, &block)
+              .merge(direction:, array_format: :serialized)
+          DataObject.new(:argument, attributes, &)
         end
 
-        def create_parameter(parameter_type, attributes, &block)
+        def create_parameter(parameter_type, attributes, &)
           attributes = attributes.merge(array_format: :serialized)
           super
         end
