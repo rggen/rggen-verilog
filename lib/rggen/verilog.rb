@@ -8,6 +8,7 @@ require_relative 'verilog/rtl/component'
 require_relative 'verilog/rtl/feature'
 require_relative 'verilog/rtl_header/component'
 require_relative 'verilog/rtl_header/feature'
+require_relative 'verilog/register_map/keyword_checker'
 require_relative 'verilog/factories'
 
 RgGen.setup_plugin :'rggen-verilog' do |plugin|
@@ -65,5 +66,9 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/rtl_header/bit_field/verilog_rtl_header',
     'verilog/rtl_header/register/verilog_rtl_header',
     'verilog/rtl_header/register_block/verilog_rtl_header'
+  ]
+
+  plugin.files [
+    'verilog/register_map/name'
   ]
 end
