@@ -34,19 +34,19 @@ RSpec.describe 'regiter_map/name' do
   end
 
   context 'レジスタブロック名がVerilogの予約語に一致する場合' do
-    it 'RegiterMapErrorを起こす' do
+    it 'SourceErrorを起こす' do
       verilog_keywords.each do |keyword|
         expect {
           create_register_map do
             register_block { name keyword }
           end
-        }.to raise_register_map_error "verilog keyword is not allowed for register block name: #{keyword}"
+        }.to raise_source_error "verilog keyword is not allowed for register block name: #{keyword}"
       end
     end
   end
 
   context 'レジスタファイル名がVerilogの予約語に一致する場合' do
-    it 'RegiterMapErrorを起こす' do
+    it 'SourceErrorを起こす' do
       verilog_keywords.each do |keyword|
         expect {
           create_register_map do
@@ -55,13 +55,13 @@ RSpec.describe 'regiter_map/name' do
               register_file { name keyword }
             end
           end
-        }.to raise_register_map_error "verilog keyword is not allowed for register file name: #{keyword}"
+        }.to raise_source_error "verilog keyword is not allowed for register file name: #{keyword}"
       end
     end
   end
 
   context 'レジスタ名がVerilogの予約語に一致する場合' do
-    it 'RegiterMapErrorを起こす' do
+    it 'SourceErrorを起こす' do
       verilog_keywords.each do |keyword|
         expect {
           create_register_map do
@@ -70,13 +70,13 @@ RSpec.describe 'regiter_map/name' do
               register { name keyword }
             end
           end
-        }.to raise_register_map_error "verilog keyword is not allowed for register name: #{keyword}"
+        }.to raise_source_error "verilog keyword is not allowed for register name: #{keyword}"
       end
     end
   end
 
   context 'ビットフィールド名がVerilogの予約語に一致する場合' do
-    it 'RegiterMapErrorを起こす' do
+    it 'SourceErrorを起こす' do
       verilog_keywords.each do |keyword|
         expect {
           create_register_map do
@@ -88,7 +88,7 @@ RSpec.describe 'regiter_map/name' do
               end
             end
           end
-        }.to raise_register_map_error "verilog keyword is not allowed for bit field name: #{keyword}"
+        }.to raise_source_error "verilog keyword is not allowed for bit field name: #{keyword}"
       end
     end
   end
