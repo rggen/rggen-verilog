@@ -26,6 +26,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/rtl/register_block/protocol',
     'verilog/rtl/register_block/protocol/apb',
     'verilog/rtl/register_block/protocol/axi4lite',
+    'verilog/rtl/register_block/protocol/avalon',
     'verilog/rtl/register_block/protocol/wishbone',
     'verilog/rtl/register_block/protocol/native',
     'verilog/rtl/register_file/verilog_top',
