@@ -6,6 +6,9 @@ RgGen.define_list_item_feature(:register_block, :protocol, :native) do
       parameter :strobe_width, {
         name: 'STROBE_WIDTH', default: bus_width / 8
       }
+      parameter :use_read_strobe, {
+        name: 'USE_READ_STROBE', default: 0
+      }
 
       input :valid, {
         name: 'i_csrbus_valid', width: 1
