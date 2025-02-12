@@ -285,9 +285,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[7]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_match[0] = w_register_value[0+:1] == 1'h0;
-        assign w_indirect_match[1] = w_register_value[8+:2] == i[0+:2];
-        assign w_indirect_match[2] = w_register_value[16+:4] == j[0+:4];
+        assign w_indirect_match[0] = w_register_value[8+:2] == i[0+:2];
+        assign w_indirect_match[1] = w_register_value[16+:4] == j[0+:4];
+        assign w_indirect_match[2] = w_register_value[0+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -424,9 +424,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[11]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_match[0] = w_register_value[96+:1] == 1'h0;
-        assign w_indirect_match[1] = w_register_value[104+:2] == i[0+:2];
-        assign w_indirect_match[2] = w_register_value[112+:4] == j[0+:4];
+        assign w_indirect_match[0] = w_register_value[104+:2] == i[0+:2];
+        assign w_indirect_match[1] = w_register_value[112+:4] == j[0+:4];
+        assign w_indirect_match[2] = w_register_value[96+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -460,9 +460,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[12]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_match[0] = w_register_value[0+:1] == 1'h0;
-        assign w_indirect_match[1] = w_register_value[8+:2] == k[0+:2];
-        assign w_indirect_match[2] = w_register_value[16+:4] == l[0+:4];
+        assign w_indirect_match[0] = w_register_value[8+:2] == k[0+:2];
+        assign w_indirect_match[1] = w_register_value[16+:4] == l[0+:4];
+        assign w_indirect_match[2] = w_register_value[0+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
@@ -496,9 +496,9 @@ RSpec.describe 'register/type/indirect' do
 
       expect(registers[13]).to generate_code(:register, :top_down, <<~'CODE')
         `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
-        assign w_indirect_match[0] = w_register_value[96+:1] == 1'h0;
-        assign w_indirect_match[1] = w_register_value[104+:2] == k[0+:2];
-        assign w_indirect_match[2] = w_register_value[112+:4] == l[0+:4];
+        assign w_indirect_match[0] = w_register_value[104+:2] == k[0+:2];
+        assign w_indirect_match[1] = w_register_value[112+:4] == l[0+:4];
+        assign w_indirect_match[2] = w_register_value[96+:1] == 1'h0;
         rggen_indirect_register #(
           .READABLE             (1),
           .WRITABLE             (1),
