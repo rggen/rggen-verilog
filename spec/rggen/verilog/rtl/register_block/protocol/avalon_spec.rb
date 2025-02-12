@@ -64,14 +64,6 @@ RSpec.describe 'register_block/protocol/avalon' do
       name: 'o_waitrequest', direction: :output, width: 1
     )
     expect(register_block).to have_port(
-      :readdatavalid,
-      name: 'o_readdatavalid', direction: :output, width: 1
-    )
-    expect(register_block).to have_port(
-      :writeresponsevalid,
-      name: 'o_writeresponsevalid', direction: :output, width: 1
-    )
-    expect(register_block).to have_port(
       :response,
       name: 'o_response', direction: :output, width: 2
     )
@@ -104,8 +96,6 @@ RSpec.describe 'register_block/protocol/avalon' do
           .i_byteenable           (i_byteenable),
           .i_writedata            (i_writedata),
           .o_waitrequest          (o_waitrequest),
-          .o_readdatavalid        (o_readdatavalid),
-          .o_writeresponsevalid   (o_writeresponsevalid),
           .o_response             (o_response),
           .o_readdata             (o_readdata),
           .o_register_valid       (w_register_valid),
