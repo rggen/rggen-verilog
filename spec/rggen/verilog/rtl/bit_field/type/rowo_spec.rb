@@ -339,8 +339,6 @@ RSpec.describe 'bit_field/type/rowo' do
   end
 
   describe '#generate_code' do
-    let(:array_port_format) { :packed }
-
     it 'rggen_bit_fieldをインスタンスするコードを生成する' do
       bit_fields = create_bit_fields do
         byte_size 256
