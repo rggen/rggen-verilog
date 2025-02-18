@@ -98,8 +98,8 @@ RSpec.describe 'bit_field/verilog_top' do
           register do
             name 'register_1'
             size [2]
-            bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 8, sequence_size: 1; type :rw; initial_value [0] }
-            bit_field { name 'bit_field_1'; bit_assignment lsb: 16, width: 8, sequence_size: 2; type :rw; initial_value [1, 2] }
+            bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 8, sequence_size: 1; type :rw; initial_value [[0], [1]] }
+            bit_field { name 'bit_field_1'; bit_assignment lsb: 16, width: 8, sequence_size: 2; type :rw; initial_value [[1, 2], [3, 4]] }
           end
 
           register_file do
@@ -117,20 +117,26 @@ RSpec.describe 'bit_field/verilog_top' do
             register do
               name 'register_0'
               size [2]
-              bit_field { name 'bit_field_0'; bit_assignment lsb: 0, width: 8, sequence_size: 1; type :rw; initial_value [0] }
-              bit_field { name 'bit_field_1'; bit_assignment lsb: 16, width: 8, sequence_size: 2; type :rw; initial_value [1, 2] }
+              bit_field {
+                name 'bit_field_0'; bit_assignment lsb: 0, width: 8, sequence_size: 1
+                type :rw; initial_value [[[0], [1]], [[2], [3]]]
+              }
+              bit_field {
+                name 'bit_field_1'; bit_assignment lsb: 16, width: 8, sequence_size: 2
+                type :rw; initial_value [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
+              }
             end
           end
         end
 
         expect(bit_fields[0].initial_value).to eq "8'h00"
         expect(bit_fields[1].initial_value).to eq "16'h0201"
-        expect(bit_fields[2].initial_value).to eq "8'h00"
-        expect(bit_fields[3].initial_value).to eq "16'h0201"
+        expect(bit_fields[2].initial_value).to eq "16'h0100"
+        expect(bit_fields[3].initial_value).to eq "32'h04030201"
         expect(bit_fields[4].initial_value).to eq "8'h00"
         expect(bit_fields[5].initial_value).to eq "16'h0201"
-        expect(bit_fields[6].initial_value).to eq "8'h00"
-        expect(bit_fields[7].initial_value).to eq "16'h0201"
+        expect(bit_fields[6].initial_value).to eq "32'h03020100"
+        expect(bit_fields[7].initial_value).to eq "64'h0807060504030201"
       end
     end
   end
@@ -199,17 +205,17 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[3]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_1_BIT_FIELD_0_INITIAL_VALUE', parameter_type: :parameter,
-        width: 1, default: "1'h0"
+        width: 1, array_size: [2], default: "{2{1'h0}}"
       )
       expect(bit_fields[4]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_1_BIT_FIELD_1_INITIAL_VALUE', parameter_type: :parameter,
-        width: 8, default: "8'h01"
+        width: 8, array_size: [2], default: "{2{8'h01}}"
       )
       expect(bit_fields[5]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_1_BIT_FIELD_2_INITIAL_VALUE', parameter_type: :parameter,
-        width: 8, array_size: [2], default: "{2{8'h02}}"
+        width: 8, array_size: [2, 2], default: "{4{8'h02}}"
       )
       expect(bit_fields[6]).to have_parameter(
         :register_block, :initial_value,
@@ -229,17 +235,17 @@ RSpec.describe 'bit_field/verilog_top' do
       expect(bit_fields[9]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_FILE_3_REGISTER_0_BIT_FIELD_0_INITIAL_VALUE', parameter_type: :parameter,
-        width: 1, default: "1'h0"
+        width: 1, array_size: [2, 2], default: "{4{1'h0}}"
       )
       expect(bit_fields[10]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_FILE_3_REGISTER_0_BIT_FIELD_1_INITIAL_VALUE', parameter_type: :parameter,
-        width: 8, default: "8'h01"
+        width: 8, array_size: [2, 2], default: "{4{8'h01}}"
       )
       expect(bit_fields[11]).to have_parameter(
         :register_block, :initial_value,
         name: 'REGISTER_FILE_3_REGISTER_0_BIT_FIELD_2_INITIAL_VALUE', parameter_type: :parameter,
-        width: 8, array_size: [2], array_format: :serialized, default: "{2{8'h02}}"
+        width: 8, array_size: [2, 2, 2], array_format: :serialized, default: "{8{8'h02}}"
       )
     end
 
@@ -285,7 +291,10 @@ RSpec.describe 'bit_field/verilog_top' do
           bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 8; type :rw; initial_value 0 }
           bit_field { name 'bit_field_2'; bit_assignment lsb: 16, sequence_size: 2; type :rw; initial_value 0 }
           bit_field { name 'bit_field_3'; bit_assignment lsb: 20, width: 2, sequence_size: 2; type :rw; initial_value default: 0 }
-          bit_field { name 'bit_field_4'; bit_assignment lsb: 24, width: 2, sequence_size: 2, step: 4; type :rw; initial_value [0, 1] }
+          bit_field {
+            name 'bit_field_4'; bit_assignment lsb: 24, width: 2, sequence_size: 2, step: 4
+            type :rw; initial_value [[0, 1], [2, 3], [3, 2], [1, 0]]
+          }
         end
 
         register do
@@ -296,7 +305,10 @@ RSpec.describe 'bit_field/verilog_top' do
           bit_field { name 'bit_field_1'; bit_assignment lsb: 8, width: 8; type :rw; initial_value 0 }
           bit_field { name 'bit_field_2'; bit_assignment lsb: 16, sequence_size: 2; type :rw; initial_value 0 }
           bit_field { name 'bit_field_3'; bit_assignment lsb: 20, width: 2, sequence_size: 2; type :rw; initial_value default: 0 }
-          bit_field { name 'bit_field_4'; bit_assignment lsb: 24, width: 2, sequence_size: 2, step: 4; type :rw; initial_value [0, 1] }
+          bit_field {
+            name 'bit_field_4'; bit_assignment lsb: 24, width: 2, sequence_size: 2, step: 4
+            type :rw; initial_value [[[0, 1], [2, 3]], [[3, 2], [1, 0]]]
+          }
         end
 
         register do
@@ -572,7 +584,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(REGISTER_1_BIT_FIELD_3_INITIAL_VALUE, 4, 2, j)),
+              .INITIAL_VALUE  (`rggen_slice(REGISTER_1_BIT_FIELD_3_INITIAL_VALUE, 16, 2, 2*i+j)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -606,7 +618,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (j = 0;j < 2;j = j + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(4'h4, 4, 2, j)),
+              .INITIAL_VALUE  (`rggen_slice(16'h1be4, 16, 2, 2*i+j)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -736,7 +748,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(REGISTER_2_BIT_FIELD_3_INITIAL_VALUE, 4, 2, k)),
+              .INITIAL_VALUE  (`rggen_slice(REGISTER_2_BIT_FIELD_3_INITIAL_VALUE, 16, 2, 4*i+2*j+k)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (
@@ -770,7 +782,7 @@ RSpec.describe 'bit_field/verilog_top' do
           for (k = 0;k < 2;k = k + 1) begin : g
             rggen_bit_field #(
               .WIDTH          (2),
-              .INITIAL_VALUE  (`rggen_slice(4'h4, 4, 2, k)),
+              .INITIAL_VALUE  (`rggen_slice(16'h1be4, 16, 2, 4*i+2*j+k)),
               .SW_WRITE_ONCE  (0),
               .TRIGGER        (0)
             ) u_bit_field (

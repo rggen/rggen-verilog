@@ -11,7 +11,7 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       if parameterized_initial_value?
         parameter :initial_value, {
           name: initial_value_name, width: bit_field.width,
-          array_size: initial_value_array_size, default: initial_value_rhs
+          array_size: initial_value_size, default: initial_value_rhs
         }
       else
         define_accessor_for_initial_value
@@ -34,7 +34,7 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
     private
 
     def register_value(offsets, lsb, width)
-      index = register.index(offsets || register.local_indices)
+      index = register.index(offsets || register.local_indexes)
       register_block.register_value[[index], lsb, width]
     end
 
@@ -52,8 +52,8 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       "#{bit_field.full_name('_')}_initial_value".upcase
     end
 
-    def initial_value_array_size
-      bit_field.initial_value_array? && [bit_field.sequence_size] || nil
+    def initial_value_size
+      bit_field.initial_value_array? && array_size || nil
     end
 
     def initial_value_rhs
@@ -62,7 +62,8 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
       elsif bit_field.fixed_initial_value?
         merged_initial_values
       else
-        repeat(bit_field.sequence_size, sized_initial_value)
+        size = array_size.inject(:*)
+        repeat(size, sized_initial_value)
       end
     end
 
@@ -71,12 +72,12 @@ RgGen.define_simple_feature(:bit_field, :verilog_top) do
     end
 
     def merged_initial_values
-      value =
-        bit_field
-          .initial_values
+      initial_values = bit_field.initial_values(flatten: true)
+      merged_value =
+        initial_values
           .map.with_index { |v, i| v << (i * bit_field.width) }
           .inject(:|)
-      hex(value, bit_field.width * bit_field.sequence_size)
+      hex(merged_value, bit_field.width * initial_values.size)
     end
 
     def loop_size
