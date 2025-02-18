@@ -23,8 +23,8 @@ RgGen.define_list_feature(:bit_field, :type) do
 
       def initial_value
         if multiple_initial_values?
-          index = bit_field.local_index
-          total_bits = width * bit_field.sequence_size
+          index = bit_field.flat_loop_index
+          total_bits = width * array_size.inject(:*)
           macro_call('rggen_slice', [bit_field.initial_value, total_bits, width, index])
         else
           bit_field.initial_value
@@ -32,7 +32,8 @@ RgGen.define_list_feature(:bit_field, :type) do
       end
 
       def multiple_initial_values?
-        bit_field.initial_value_array? && bit_field.sequence_size > 1
+        bit_field.initial_value_array? &&
+          (array_size.size > 1 || array_size.first > 1)
       end
 
       def clock
@@ -75,7 +76,7 @@ RgGen.define_list_feature(:bit_field, :type) do
         bit_field.reference? &&
           bit_field
             .find_reference(register_block.bit_fields)
-            .value(bit_field.local_indices, bit_field.reference_width)
+            .value(bit_field.local_indexes, bit_field.reference_width)
       end
 
       def loop_variables
