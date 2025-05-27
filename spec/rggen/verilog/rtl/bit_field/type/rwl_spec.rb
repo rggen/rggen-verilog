@@ -273,14 +273,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (1),
           .INITIAL_VALUE            (1'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_0_bit_field_0_lock),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+          .i_sw_mask          (w_bit_field_mask[0+:1]),
           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
           .o_sw_value         (w_bit_field_value[0+:1]),
@@ -301,14 +302,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (1),
           .INITIAL_VALUE            (1'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[1+:1]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[832+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[1+:1]),
+          .i_sw_mask          (w_bit_field_mask[1+:1]),
           .i_sw_write_data    (w_bit_field_write_data[1+:1]),
           .o_sw_read_data     (w_bit_field_read_data[1+:1]),
           .o_sw_value         (w_bit_field_value[1+:1]),
@@ -329,14 +331,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (2),
           .INITIAL_VALUE            (2'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[4+:2]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_0_bit_field_2_lock),
-          .i_sw_write_mask    (w_bit_field_write_mask[4+:2]),
+          .i_sw_mask          (w_bit_field_mask[4+:2]),
           .i_sw_write_data    (w_bit_field_write_data[4+:2]),
           .o_sw_read_data     (w_bit_field_read_data[4+:2]),
           .o_sw_value         (w_bit_field_value[4+:2]),
@@ -357,14 +360,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (2),
           .INITIAL_VALUE            (2'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[6+:2]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[832+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[6+:2]),
+          .i_sw_mask          (w_bit_field_mask[6+:2]),
           .i_sw_write_data    (w_bit_field_write_data[6+:2]),
           .o_sw_read_data     (w_bit_field_read_data[6+:2]),
           .o_sw_value         (w_bit_field_value[6+:2]),
@@ -385,14 +389,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[16+8*i+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_0_bit_field_4_lock[1*(i)+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[16+8*i+:4]),
+          .i_sw_mask          (w_bit_field_mask[16+8*i+:4]),
           .i_sw_write_data    (w_bit_field_write_data[16+8*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[16+8*i+:4]),
           .o_sw_value         (w_bit_field_value[16+8*i+:4]),
@@ -413,14 +418,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[20+8*i+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[832+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[20+8*i+:4]),
+          .i_sw_mask          (w_bit_field_mask[20+8*i+:4]),
           .i_sw_write_data    (w_bit_field_write_data[20+8*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[20+8*i+:4]),
           .o_sw_value         (w_bit_field_value[20+8*i+:4]),
@@ -441,14 +447,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[16+8*j+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_1_bit_field_4_lock[1*(2*i+j)+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[16+8*j+:4]),
+          .i_sw_mask          (w_bit_field_mask[16+8*j+:4]),
           .i_sw_write_data    (w_bit_field_write_data[16+8*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[16+8*j+:4]),
           .o_sw_value         (w_bit_field_value[16+8*j+:4]),
@@ -469,14 +476,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[20+8*j+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[832+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[20+8*j+:4]),
+          .i_sw_mask          (w_bit_field_mask[20+8*j+:4]),
           .i_sw_write_data    (w_bit_field_write_data[20+8*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[20+8*j+:4]),
           .o_sw_value         (w_bit_field_value[20+8*j+:4]),
@@ -497,14 +505,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[16+8*k+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_2_bit_field_4_lock[1*(4*i+2*j+k)+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[16+8*k+:4]),
+          .i_sw_mask          (w_bit_field_mask[16+8*k+:4]),
           .i_sw_write_data    (w_bit_field_write_data[16+8*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[16+8*k+:4]),
           .o_sw_value         (w_bit_field_value[16+8*k+:4]),
@@ -525,14 +534,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[20+8*k+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[832+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[20+8*k+:4]),
+          .i_sw_mask          (w_bit_field_mask[20+8*k+:4]),
           .i_sw_write_data    (w_bit_field_write_data[20+8*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[20+8*k+:4]),
           .o_sw_value         (w_bit_field_value[20+8*k+:4]),
@@ -553,14 +563,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (1),
           .INITIAL_VALUE            (1'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[864+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+          .i_sw_mask          (w_bit_field_mask[0+:1]),
           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
           .o_sw_value         (w_bit_field_value[0+:1]),
@@ -581,14 +592,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[16+8*m+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (i_register_file_4_register_file_0_register_0_bit_field_4_lock[1*(16*i+8*j+4*k+2*l+m)+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[16+8*m+:4]),
+          .i_sw_mask          (w_bit_field_mask[16+8*m+:4]),
           .i_sw_write_data    (w_bit_field_write_data[16+8*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[16+8*m+:4]),
           .o_sw_value         (w_bit_field_value[16+8*m+:4]),
@@ -609,14 +621,15 @@ RSpec.describe 'bit_field/type/rwl' do
         rggen_bit_field #(
           .WIDTH                    (4),
           .INITIAL_VALUE            (4'h0),
+          .SW_WRITE_CONTROL         (1'b1),
           .SW_WRITE_ENABLE_POLARITY (`RGGEN_ACTIVE_LOW)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[20+8*m+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (w_register_value[32*(28+2*i+j)+0+:1]),
-          .i_sw_write_mask    (w_bit_field_write_mask[20+8*m+:4]),
+          .i_sw_mask          (w_bit_field_mask[20+8*m+:4]),
           .i_sw_write_data    (w_bit_field_write_data[20+8*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[20+8*m+:4]),
           .o_sw_value         (w_bit_field_value[20+8*m+:4]),

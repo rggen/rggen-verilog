@@ -6,14 +6,14 @@ RgGen.define_simple_feature(:register, :verilog_top) do
 
     build do
       unless register.bit_fields.empty?
-        wire :bit_field_valid, {
-          name: 'w_bit_field_valid', width: 1
+        wire :bit_field_read_valid, {
+          name: 'w_bit_field_read_valid', width: 1
         }
-        wire :bit_field_read_mask, {
-          name: 'w_bit_field_read_mask', width: register.width
+        wire :bit_field_write_valid, {
+          name: 'w_bit_field_write_valid', width: 1
         }
-        wire :bit_field_write_mask, {
-          name: 'w_bit_field_write_mask', width: register.width
+        wire :bit_field_mask, {
+          name: 'w_bit_field_mask', width: register.width
         }
         wire :bit_field_write_data, {
           name: 'w_bit_field_write_data', width: register.width
