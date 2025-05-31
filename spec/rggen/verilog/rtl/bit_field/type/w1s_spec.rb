@@ -226,14 +226,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (1),
           .INITIAL_VALUE    (1'h0),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+:1]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+:1]),
+          .i_sw_mask          (w_bit_field_mask[0+:1]),
           .i_sw_write_data    (w_bit_field_write_data[0+:1]),
           .o_sw_read_data     (w_bit_field_read_data[0+:1]),
           .o_sw_value         (w_bit_field_value[0+:1]),
@@ -255,14 +256,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (16),
           .INITIAL_VALUE    (16'habcd),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[16+:16]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[16+:16]),
+          .i_sw_mask          (w_bit_field_mask[16+:16]),
           .i_sw_write_data    (w_bit_field_write_data[16+:16]),
           .o_sw_read_data     (w_bit_field_read_data[16+:16]),
           .o_sw_value         (w_bit_field_value[16+:16]),
@@ -284,14 +286,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (64),
           .INITIAL_VALUE    (64'h0000000000000000),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+:64]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+:64]),
+          .i_sw_mask          (w_bit_field_mask[0+:64]),
           .i_sw_write_data    (w_bit_field_write_data[0+:64]),
           .o_sw_read_data     (w_bit_field_read_data[0+:64]),
           .o_sw_value         (w_bit_field_value[0+:64]),
@@ -313,14 +316,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (4),
           .INITIAL_VALUE    (4'h0),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+8*i+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+8*i+:4]),
+          .i_sw_mask          (w_bit_field_mask[0+8*i+:4]),
           .i_sw_write_data    (w_bit_field_write_data[0+8*i+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*i+:4]),
           .o_sw_value         (w_bit_field_value[0+8*i+:4]),
@@ -342,14 +346,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (4),
           .INITIAL_VALUE    (4'h0),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+8*j+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+8*j+:4]),
+          .i_sw_mask          (w_bit_field_mask[0+8*j+:4]),
           .i_sw_write_data    (w_bit_field_write_data[0+8*j+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*j+:4]),
           .o_sw_value         (w_bit_field_value[0+8*j+:4]),
@@ -371,14 +376,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (4),
           .INITIAL_VALUE    (4'h0),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+8*k+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+8*k+:4]),
+          .i_sw_mask          (w_bit_field_mask[0+8*k+:4]),
           .i_sw_write_data    (w_bit_field_write_data[0+8*k+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*k+:4]),
           .o_sw_value         (w_bit_field_value[0+8*k+:4]),
@@ -400,14 +406,15 @@ RSpec.describe 'bit_field/type/w1s' do
           .WIDTH            (4),
           .INITIAL_VALUE    (4'h0),
           .SW_READ_ACTION   (`RGGEN_READ_DEFAULT),
-          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET)
+          .SW_WRITE_ACTION  (`RGGEN_WRITE_1_SET),
+          .HW_ACCESS        (3'b100)
         ) u_bit_field (
           .i_clk              (i_clk),
           .i_rst_n            (i_rst_n),
-          .i_sw_valid         (w_bit_field_valid),
-          .i_sw_read_mask     (w_bit_field_read_mask[0+8*m+:4]),
+          .i_sw_read_valid    (w_bit_field_read_valid),
+          .i_sw_write_valid   (w_bit_field_write_valid),
           .i_sw_write_enable  (1'b1),
-          .i_sw_write_mask    (w_bit_field_write_mask[0+8*m+:4]),
+          .i_sw_mask          (w_bit_field_mask[0+8*m+:4]),
           .i_sw_write_data    (w_bit_field_write_data[0+8*m+:4]),
           .o_sw_read_data     (w_bit_field_read_data[0+8*m+:4]),
           .o_sw_value         (w_bit_field_value[0+8*m+:4]),
