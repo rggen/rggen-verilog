@@ -2,7 +2,7 @@
 [![CI](https://github.com/rggen/rggen-verilog/workflows/CI/badge.svg)](https://github.com/rggen/rggen-verilog/actions?query=workflow%3ACI)
 [![Maintainability](https://qlty.sh/badges/93f1f04b-d863-4f44-a968-2f2721a8f3de/maintainability.svg)](https://qlty.sh/gh/rggen/projects/rggen-verilog)
 [![codecov](https://codecov.io/gh/rggen/rggen-verilog/branch/master/graph/badge.svg)](https://codecov.io/gh/rggen/rggen-verilog)
-[![Gitter](https://badges.gitter.im/rggen/rggen.svg)](https://gitter.im/rggen/rggen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Discord](https://img.shields.io/discord/1406572699467124806?style=flat&logo=discord)](https://discord.com/invite/KWya83ZZxr)
 
 # RgGen::Verilog
 
@@ -62,7 +62,7 @@ Feedbacks, bus reports, questions and etc. are welcome! You can post them bu usi
 
 * [GitHub Issue Tracker](https://github.com/rggen/rggen/issues)
 * [GitHub Discussions](https://github.com/rggen/rggen/discussions)
-* [Chat Room](https://gitter.im/rggen/rggen)
+* [Discord](https://discord.com/invite/KWya83ZZxr)
 * [Mailing List](https://groups.google.com/d/forum/rggen)
 * [Mail](mailto:rggen@googlegroups.com)
 
