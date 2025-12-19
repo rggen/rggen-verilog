@@ -34,6 +34,7 @@ RgGen.setup_plugin :'rggen-verilog' do |plugin|
     'verilog/rtl/register/type',
     'verilog/rtl/register/type/external',
     'verilog/rtl/register/type/indirect',
+    'verilog/rtl/register/type/maskable',
     'verilog/rtl/register/type/rw',
     'verilog/rtl/bit_field/verilog_top',
     'verilog/rtl/bit_field/type',
