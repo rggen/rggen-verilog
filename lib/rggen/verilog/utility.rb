@@ -20,6 +20,10 @@ module RgGen
       def width_cast(expression, _width)
         expression
       end
+
+      def macro_call(macro_name, args)
+        function_call("`#{macro_name}", args)
+      end
     end
   end
 end
