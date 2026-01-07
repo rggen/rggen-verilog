@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.2')
 
-  spec.add_dependency 'rggen-systemverilog', '>= 0.35.1'
+  spec.add_dependency 'rggen-systemverilog', '>= 0.36.0'
 end
